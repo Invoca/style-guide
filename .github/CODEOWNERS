@@ -1,0 +1,3 @@
+.hound.yml           @alecjacobs5401
+ruby/.rubocop.yml    @alecjacobs5401 @peterwilson
+scss/.scss-lint.yml  @nburwell
