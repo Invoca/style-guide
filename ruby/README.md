@@ -568,9 +568,28 @@ This is because stabby lambda arguments are treated just like regular method arg
 lam = lambda { |a, b| a + (b || 0) }
 lam.call(1, 2)
 
+# bad - space between stabby lambda and arguments 
+lam = -> (a, b = 0) { a + b }
+lam.call(1, 2)
+
 # good
 lam = ->(a, b = 0) { a + b }
 lam.call(1, 2)
+```
+
+### `->` (stabby lambda) syntax is preferred even for multi-line blocks
+```ruby
+# bad
+lam = lambda do |a, b| 
+  c = b || 0
+  a + c
+end
+
+# good
+lam = ->(a, b) do 
+  c = b || 0
+  a + c
+end
 ```
 
 ### Use `_` for unused block parameters.
