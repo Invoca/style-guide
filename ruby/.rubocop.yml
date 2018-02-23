@@ -93,6 +93,9 @@ Style/HashSyntax:
 Style/IfUnlessModifier:
   Enabled: false
 
+Style/Lambda:
+  EnforcedStyle: literal
+
 Style/Next:
   Enabled: false
 
@@ -115,6 +118,9 @@ Style/StringLiterals:
   Enabled: false
 
 Style/SymbolArray:
+  Enabled: false
+
+Style/TrailingCommaInLiteral:
   Enabled: false
 
 Style/WordArray:
