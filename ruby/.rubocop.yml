@@ -55,6 +55,9 @@ Metrics/ClassLength:
 Metrics/LineLength:
   Max: 150
 
+Performance/StringReplacement:
+  Enabled: false
+
 Style/AndOr:
   EnforcedStyle: conditionals
 
