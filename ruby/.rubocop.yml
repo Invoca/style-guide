@@ -58,6 +58,9 @@ Metrics/LineLength:
 Performance/StringReplacement:
   Enabled: false
 
+Performance/TimesMap:
+  Enabled: false
+
 Style/AndOr:
   EnforcedStyle: conditionals
 
