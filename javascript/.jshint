@@ -1,0 +1,14 @@
+{
+  "esversion" : 6,
+  "options" : {
+    "expr" : true,
+    "multistr" : true,
+    "undef" : true,
+    "curly": true,
+    "indent": 2,
+    "white" : false,
+    "browser" : true,
+    "devel" : true,
+    "jquery" : true
+  }
+}
