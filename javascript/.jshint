@@ -1,0 +1,36 @@
+{
+  "esversion" : 6,
+  "options" : {
+    "expr" : true,
+    "multistr" : true,
+    "undef" : true,
+    "curly": true,
+    "indent": 2,
+    "white" : false,
+    "browser" : true,
+    "devel" : true,
+    "jquery" : true
+  },
+
+  "sourceGlobals" : {
+    "Backbone" : false,
+    "_" : false,
+    "JST" : false,
+    "Backdraft" : false,
+    "Dialog" : false,
+    "Invoca" : false
+  },
+
+  "specGlobals" : {
+    "describe" : false,
+    "expect" : false,
+    "spyOn" : false,
+    "it" : false,
+    "jasmine" : false,
+    "beforeEach" : false,
+    "afterEach" : false,
+    "MockData" : false,
+    "xit" : false,
+    "app" : false
+  }
+}

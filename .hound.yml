@@ -1,9 +1,8 @@
 ruby:
   config_file: ./ruby/.rubocop.yml
 
-# We use jshint in grunt commands, so ignore it here for now
 jshint:
-  enabled: false
+  config_file: ./javascript/.jshint
 
 scss:
   config_file: ./scss/.scss-lint.yml
