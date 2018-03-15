@@ -12,44 +12,59 @@ Any adjustments to this styleguide should be captured in the [.scss-lint.yml](.s
 * [Class Names](#class-names)
 
 ### Syntax
+
+#### Spacing / structure
 * Use soft-tabs with a two space indent.
-* Put no space before and one space after `:` in property declarations.
+* Put no space before and one space after `:` in property declarations
 * Put one space before `{` in rule declarations.
 * Opening `{` should be on same line as selector
 * Closing `}` should be on newline, at same indentation as selector
-* Use hex color codes `#000` unless using rgba.
-* Use `//` for comment blocks (instead of `/* */`).
+* Each property should be on it's own line
 * Leave a line of whitespace between style blocks
 
-Here is good example syntax:
+Good example syntax:
 ```css
 .styleguide-format {
   border: 1px solid #0f0;
-  color: #000;
-  background: rgba(0,0,0,0.5);
+  color: $page-text-color;
+  background: $page-background-color;
 }
  
 .single-style {
-  color: #fff;
+  color: $invoca-primary-color;
 }
 ```
 
-### Class names
-TODO: this section needs filling out further.
+#### Colors / values
+* Use variables for colors instead of hard coded values
+* When defining variables, use hex color codes `#000` unless using rgba.
 
-Use dashes to separate words
+  ```
+  $page-text-color: #000;
+  $page-background-color: rgba(0,0,0,0.5);
+  ```
+
+* Use `0` instead of `0px` or `0rem`
+
+#### Comments
+* Use `//` for comment blocks (instead of `/* */`).
+
+
+#### Selectors
+* Use dashes to separate words
+* Put multiple selectors (for a single declaration) on their own line
+
 ```css
-
-.loading-indicator {
-  ...
-}
- 
-.top-heading {
-  ...
+.icon-warning,
+.icon-error {
+  padding-right: 0.5rem;
 }
 ```
 
-Prefix plugin or component specific classes with the name of component and `--`
+* Avoid nesting selectors beyond 3 levels deep
+
+##### Component selectors
+* Prefix plugin or component specific classes with the name of component and `--`
 * This makes it easy to know in HTML what the styles are for
 * Prevents colusions with global classes or other component's classes
 * Easy to search in codebase if refactoring is needed or the component is removed entirely
@@ -61,14 +76,4 @@ Prefix plugin or component specific classes with the name of component and `--`
 .infinite-scroll--table-row {
   ...
 }
-```
-
-Prefix classes that are only used for jQuery to find elements with `js-`
-* Avoids coupling styles with JS behavior (where you might accidentally break JS controls when refactoring or removing CSS styles)
-* Easy to know at a glance in HTML why a class is there
-* jQuery should not be selecting elements without a `js-` prefix
-```css
-<div class="js-status-message"></div>
- 
-<span class="js-hide-on-loading"></span>
 ```
