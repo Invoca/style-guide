@@ -43,14 +43,13 @@ Metrics/BlockLength:
   Exclude:
     - 'Rakefile'
     - '**/*.rake'
-    - 'test/**/*_test.rb'
+    - '**/*_test.rb'
     # Autobahn - RSpec relies on large blocks
-    - 'tests/**/*_spec.rb'
-    - 'spec/**/*_spec.rb'
+    - '**/*_spec.rb'
 
 Metrics/ClassLength:
   Exclude:
-    - 'test/**/*_test.rb'
+    - '**/*_test.rb'
 
 Metrics/LineLength:
   Max: 150
