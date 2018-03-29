@@ -12,7 +12,6 @@ Any adjustments to this styleguide should be captured in the [.rubocop.yml](.rub
 * [Syntax](#syntax)
 * [Naming](#naming)
 * [Comments](#comments)
-* [Annotations](#annotations)
 * [Classes](#classes)
 * [Exceptions](#exceptions)
 * [Collections](#collections)
@@ -141,6 +140,23 @@ def send_mail(source)
                  subject: 'Important message',
                  body: source.text)
 end
+```
+
+### Prefer leading dot notation when chaining method calls on multiple lines
+```ruby
+# bad
+def trailing_dot
+  method.
+    chain.
+    chain
+end 
+
+# good
+def leading_dot
+  method
+    .chain
+    .chain
+end 
 ```
 
 ### Use RDoc and its conventions for API documentation.
