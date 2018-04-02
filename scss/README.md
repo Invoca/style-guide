@@ -51,7 +51,6 @@ Good example syntax:
 
 
 #### Selectors
-* Use dashes to separate words
 * Put multiple selectors (for a single declaration) on their own line
 
 ```css
@@ -63,17 +62,69 @@ Good example syntax:
 
 * Avoid nesting selectors beyond 3 levels deep
 
-##### Component selectors
-* Prefix plugin or component specific classes with the name of component and `--`
-* This makes it easy to know in HTML what the styles are for
-* Prevents colusions with global classes or other component's classes
-* Easy to search in codebase if refactoring is needed or the component is removed entirely
+
+### Class Names
+We use [BEM Naming conventions](http://getbem.com/naming/).
+
+Use hyphens to delimit word boundaries.
+
+#### Blocks
+Encapsulates a standalone entity that is meaningful on its own.
+
+_Examples_
 ```css
-.infinite-scroll--more-results-indicator {
-  ...
+.panel {
+
 }
- 
-.infinite-scroll--table-row {
-  ...
+
+.js-wizard-overview {
+
+}
+```
+
+#### Elements
+Parts of a block that have no standalone meaning. 
+
+_Naming_
+
+Includes block name, a double-underscore, followed by the element name.
+
+_Examples_
+```css
+.panel__header {
+
+}
+
+.js-wizard-overview__public-title {
+
+}
+```
+
+
+#### Modifier
+Flags on blocks or elements. Use them to change appearance, behavior or state. 
+
+_Naming_
+
+Includes full name of target class its modifying (block or element), a double-hyphen, followed by the modifier name.
+
+_Examples_
+```css
+// on blocks
+.panel--simplified {
+
+}
+
+.js-wizard-overview--draft {
+
+}
+
+// on elements
+.panel__header--redacted {
+
+}
+
+.js-wizard-overview__public-title--submitted-for-review {
+
 }
 ```
