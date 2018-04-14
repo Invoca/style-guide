@@ -1,0 +1,23 @@
+{
+  "name": "style-guide",
+  "version": "1.0.0",
+  "description": "Invoca's style guide",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Invoca/style-guide.git"
+  },
+  "author": "Invoca",
+  "license": "MIT",
+  "peerDependencies": {
+    "eslint": ">= 4.19.1",
+    "eslint-config-standard": "^11.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/Invoca/style-guide/issues"
+  },
+  "homepage": "https://github.com/Invoca/style-guide#readme"
+}

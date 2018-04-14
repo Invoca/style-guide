@@ -2,7 +2,11 @@ ruby:
   config_file: ./ruby/.rubocop.yml
 
 jshint:
-  config_file: ./javascript/.jshint
+  enabled: false
+
+eslint:
+  enabled: true
+  config_file: ./javascript/.eslintrc.json
 
 scss:
   config_file: ./scss/.scss-lint.yml
