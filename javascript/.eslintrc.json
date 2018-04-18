@@ -5,7 +5,7 @@ global JST
 global Backdraft
 global Dialog
 global Invoca
-global desribe
+global describe
 global expect
 global spyOn
 global it

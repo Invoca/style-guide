@@ -257,7 +257,10 @@ var Widget = {
 }
 ```
 
+#### Switch statements
 Blank line between case statements in switch
+
+Indent `case` as deep as `switch`
 ```js
 // good
 
