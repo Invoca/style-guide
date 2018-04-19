@@ -257,34 +257,37 @@ var Widget = {
 }
 ```
 
+#### Switch statements
 Blank line between case statements in switch
+
+Indent `case` as deep as `switch`
 ```js
 // good
 
 switch(foo) {
-  case 'bar':
-    alert("it's bar!");
-    break;
- 
-  case 'bar2':
-    alert("it's bar2!");
-    break;
- 
-  default:
-    alert("default!");
+case 'bar':
+  alert("it's bar!");
+  break;
+
+case 'bar2':
+  alert("it's bar2!");
+  break;
+
+default:
+  alert("default!");
 }
  
 // bad
 
 switch(foo) {
-  case 'bar':
-    alert("it's bar!");
-    break;
-  case 'bar2':
-    alert("it's bar2!");
-    break;
-  default:
-    alert("default!");
+case 'bar':
+  alert("it's bar!");
+  break;
+case 'bar2':
+  alert("it's bar2!");
+  break;
+default:
+  alert("default!");
 }
 ```
 
