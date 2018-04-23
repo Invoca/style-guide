@@ -1,5 +1,6 @@
-# Prelude
-Invoca JavaScript Style Guide
+## Invoca Javascript Style Guide
+* The javascript style guide rules are defined in the [ESlint configuration file](eslintrc.json) file.
+* The style guide rules that couldn't be defined in ESlint are documented below.
 
 ## Table Of Contents
 
