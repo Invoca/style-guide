@@ -1,5 +1,5 @@
 ## Invoca Javascript Style Guide
-* The javascript style guide rules are defined in the [ESlint configuration file](eslintrc.json) file.
+* The javascript style guide rules are defined in the [ESlint configuration file](https://github.com/Invoca/style-guide/blob/master/javascript/.eslintrc.json) file.
 * The style guide rules that couldn't be defined in ESlint are documented below.
 
 ## Table Of Contents
@@ -10,20 +10,6 @@
 * [CoffeeScript](#coffeescript)
 
 ## Source Code Layout
-
-Use two spaces per indentation level. No hard tabs. 
-
-```js
-// good
-function foo() {
-  alert('hi');
-}
-
-// bad - four spaces
-function foo() {
-    alert('hi');
-}
-```
 
 No space before `:` in a hash; by default do not line up items 
 ```js
@@ -129,18 +115,6 @@ render: function() {
 }
 ```
 
-Use `===` and `!==`, not `==` and `!=`  (our Backdraft lint enforces this)
-```js
-// good
-if (myVar === -1) {
-  ...
-}
-
-// bad
-if (myVar == -1) {
-  ...
-}
-```
 
 When possible (and you only need falsey), rely on `null` & `undefined` returning false by default 
 ```js
