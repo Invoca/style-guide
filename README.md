@@ -11,7 +11,10 @@ Centralized repository for all of Invoca's language style guides and HoundCI con
 
 1. Clone the repo
 2. Make a branch, make your change
-3. Submit a PR and tag any active maintainers
+  * Update [.rubocop](ruby/.rubocop.yml) and [the Ruby README](ruby/README.md) for Ruby style changes
+  * Update [.eslintrc.json](javascript/.eslintrc.json), [.jshint](javascript/.jshint), and [the JavaScript README](javascript/README.md) for JavaScript style changes
+  * Update [.scss-lint.yml](scss/.scss-lint.yml) and [the SCSS README](scss/README.md) for SCSS/SASS style changes
+4. Submit a PR and tag any active maintainers
 
 ## Making Changes
 
