@@ -19,6 +19,7 @@ Any adjustments to this styleguide should be captured in the [.rubocop.yml](.rub
 * [Regular Expressions](#regular-expressions)
 * [Metaprogramming](#metaprogramming)
 * [Misc](#misc)
+* [Preferred Ruby-isms](#preferred-ruby-isms)
 
 ## Source Code Layout
 
@@ -1152,3 +1153,39 @@ Ideally, most methods will be shorter than 5 lines of code. Comments and empty l
 
 ### Use `OptionParser` for parsing complex command line options and
 `ruby -s` for trivial command line options.
+
+## Preferred Ruby-isms
+
+Items under this section are designed to help clarify design patterns common in our Ruby code. These patterns are designed to help in various ways, including but not limited to:
+
+1. Avoiding common bugs
+2. Creating code that is more:
+   * maintainable
+   * understandable
+   * extendable
+   * intention revealing
+
+### Casting Booleans with `!!`
+
+A common ruby-ism for casting booleans is to precede the method call(s) with `!!`. By calling the negation operator twice, we cast to a boolean twice. The first is the negated boolean (e.g. nil => true) and the second converts the new boolean to the original truthiness (e.g. nil => true => false).
+
+This style should be used when truthiness is not acceptable, and a `true` or `false` value is required or expected.
+
+##### Useful
+```ruby
+# JSON expects true/false, not truthiness
+def to_json
+  record = find_by_id(1)
+  {
+    record_exists: !!record
+  }
+end
+
+```
+##### Unnecessary
+```ruby
+# The if only needs truthiness, not explicit true or false
+if !!User.find_by_id(1)
+  ...
+end
+```
