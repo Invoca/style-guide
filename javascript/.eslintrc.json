@@ -44,6 +44,8 @@
     "no-unneeded-ternary": ["error", { "defaultAssignment": false }],
     "space-before-function-paren": ["error", "never"],
     "semi": ["error", "always"],
-    "quotes": "off"
+    "quotes": "off",
+    "array-bracket-spacing": ["error", "never"],
+    "object-curly-spacing": ["error", "always"]
   }
 }
