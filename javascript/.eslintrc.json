@@ -13,6 +13,7 @@
     "document": false,
     "navigator": false,
     "window": false,
+    "moment": false,
     "Backbone": false,
     "_": false,
     "JST": false,
