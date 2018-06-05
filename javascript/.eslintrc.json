@@ -123,6 +123,7 @@
     "semi": ["error", "always"],
     "quotes": "off",
     "array-bracket-spacing": ["error", "never"],
-    "object-curly-spacing": ["error", "always"]
+    "object-curly-spacing": ["error", "always"],
+    "no-extra-semi": "error"
   }
 }
