@@ -124,6 +124,7 @@
     "quotes": "off",
     "array-bracket-spacing": ["error", "never"],
     "object-curly-spacing": ["error", "always"],
-    "no-extra-semi": "error"
+    "no-extra-semi": "error",
+    "no-debugger": "error"
   }
 }
