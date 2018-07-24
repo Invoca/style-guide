@@ -53,6 +53,8 @@ Metrics/ClassLength:
 
 Metrics/LineLength:
   Max: 150
+  Exclude:
+    - '**/*_test.rb'
 
 Performance/StringReplacement:
   Enabled: false
