@@ -77,9 +77,6 @@ Metrics/ParameterLists:
 Metrics/PerceivedComplexity:
   Max: 10
 
-Naming/HeredocDelimiterNaming:
-  Enabled: false
-
 Performance/StringReplacement:
   Enabled: false
 
