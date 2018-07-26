@@ -9,6 +9,8 @@ AllCops:
     - 'vendor/gems/**/*'
     - 'node_modules/**/*'
     - 'db/migrate/**/*.rb'
+    - '**/db/migrate/**/*.rb'
+    - '**/db/schema.rb'
     - !ruby/regexp /old_and_unused\.rb$/
 
 # Configure cops for styles that we do not adhere to or are not agreed upon
@@ -39,6 +41,9 @@ Layout/SpaceInsideBlockBraces:
 Lint/AmbiguousRegexpLiteral:
   Enabled: false
 
+Metrics/AbcSize:
+  Max: 25
+
 Metrics/BlockLength:
   Exclude:
     - 'Rakefile'
@@ -48,13 +53,29 @@ Metrics/BlockLength:
     - '**/*_spec.rb'
 
 Metrics/ClassLength:
+  Max: 200
   Exclude:
     - '**/*_test.rb'
+
+Metrics/CyclomaticComplexity:
+  Max: 10
 
 Metrics/LineLength:
   Max: 150
   Exclude:
     - '**/*_test.rb'
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/ModuleLength:
+  Max: 200
+
+Metrics/ParameterLists:
+  Max: 10
+
+Metrics/PerceivedComplexity:
+  Max: 10
 
 Performance/StringReplacement:
   Enabled: false
