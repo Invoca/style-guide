@@ -55,6 +55,9 @@ Metrics/ClassLength:
   Exclude:
     - '**/*_test.rb'
 
+Metrics/CyclomaticComplexity:
+  Max: 10
+
 Metrics/LineLength:
   Max: 150
   Exclude:
@@ -66,13 +69,10 @@ Metrics/MethodLength:
 Metrics/ModuleLength:
   Max: 200
 
-Metrics/CyclomaticComplexity:
+Metrics/ParameterLists:
   Max: 10
 
 Metrics/PerceivedComplexity:
-  Max: 10
-
-Metrics/ParameterLists:
   Max: 10
 
 Performance/StringReplacement:
