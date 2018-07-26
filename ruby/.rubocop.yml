@@ -39,6 +39,9 @@ Layout/SpaceInsideBlockBraces:
 Lint/AmbiguousRegexpLiteral:
   Enabled: false
 
+Metrics/AbcSize:
+  Max: 25
+
 Metrics/BlockLength:
   Exclude:
     - 'Rakefile'
@@ -48,6 +51,7 @@ Metrics/BlockLength:
     - '**/*_spec.rb'
 
 Metrics/ClassLength:
+  Max: 200
   Exclude:
     - '**/*_test.rb'
 
@@ -55,6 +59,21 @@ Metrics/LineLength:
   Max: 150
   Exclude:
     - '**/*_test.rb'
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/ModuleLength:
+  Max: 200
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+Metrics/PerceivedComplexity:
+  Max: 10
+
+Metrics/ParameterLists:
+  Max: 10
 
 Performance/StringReplacement:
   Enabled: false
