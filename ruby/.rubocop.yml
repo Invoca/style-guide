@@ -9,6 +9,8 @@ AllCops:
     - 'vendor/gems/**/*'
     - 'node_modules/**/*'
     - 'db/migrate/**/*.rb'
+    - '**/db/migrate/**/*.rb'
+    - '**/db/schema.rb'
     - !ruby/regexp /old_and_unused\.rb$/
 
 # Configure cops for styles that we do not adhere to or are not agreed upon
@@ -74,6 +76,9 @@ Metrics/ParameterLists:
 
 Metrics/PerceivedComplexity:
   Max: 10
+
+Naming/HeredocDelimiterNaming:
+  Enabled: false
 
 Performance/StringReplacement:
   Enabled: false
