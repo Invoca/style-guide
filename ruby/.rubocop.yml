@@ -77,6 +77,9 @@ Metrics/ParameterLists:
 Metrics/PerceivedComplexity:
   Max: 10
 
+Performance/RegexpMatch:
+  Enabled: false
+
 Performance/StringReplacement:
   Enabled: false
 
@@ -130,6 +133,9 @@ Style/Next:
 Style/NumericLiterals:
   MinDigits: 9
 
+Style/NumericPredicate:
+  Enabled: false
+
 Style/PreferredHashMethods:
   Enabled: false
 
@@ -156,3 +162,4 @@ Style/TrailingCommaInHashLiteral:
 
 Style/WordArray:
   Enabled: false
+  
