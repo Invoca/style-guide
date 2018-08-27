@@ -115,6 +115,9 @@ Style/DoubleNegation:
 Style/EachWithObject:
   Enabled: false
 
+Style/EmptyMethod:
+  Enabled: false
+
 Style/GuardClause:
   Enabled: false
 
