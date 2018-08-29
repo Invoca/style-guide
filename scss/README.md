@@ -64,7 +64,7 @@ Good example syntax:
 
 
 ### Class Names
-We use [BEM Naming conventions](http://getbem.com/naming/).
+We use [BEM Naming conventions](https://en.bem.info/).
 
 Use hyphens to delimit word boundaries.
 
