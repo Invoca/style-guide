@@ -132,6 +132,9 @@ Style/HashSyntax:
 
 Style/IfUnlessModifier:
   Enabled: false
+  
+Style/NegatedIf:
+  Enabled: false
 
 Style/Lambda:
   EnforcedStyle: literal
