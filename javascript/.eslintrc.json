@@ -125,6 +125,7 @@
     "array-bracket-spacing": ["error", "never"],
     "object-curly-spacing": ["error", "always"],
     "no-extra-semi": "error",
-    "react/no-deprecated": "off"
+    "react/no-deprecated": "off",
+    "react/jsx-uses-vars": [2]
   }
 }
