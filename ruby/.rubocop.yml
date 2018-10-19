@@ -81,7 +81,10 @@ Metrics/PerceivedComplexity:
   Max: 10
 
 Naming/HeredocDelimiterNaming:	
-  Enabled: false	
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
 
 Performance/RegexpMatch:
   Enabled: false
