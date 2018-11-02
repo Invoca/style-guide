@@ -10,3 +10,6 @@ eslint:
 
 scss:
   config_file: ./scss/.scss-lint.yml
+
+rubocop:
+  version: 0.60.0
