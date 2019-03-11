@@ -5,6 +5,7 @@
     "jasmine": true,
     "jquery": true
   },
+  "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module"
   },
