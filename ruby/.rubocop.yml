@@ -181,5 +181,8 @@ Style/TrailingCommaInArrayLiteral:
 Style/TrailingCommaInHashLiteral:
   Enabled: false
 
+Style/TrailingUnderscoreVariable:
+  Enabled: false
+
 Style/WordArray:
   Enabled: false
