@@ -20,6 +20,9 @@ AllCops:
 Layout/AccessModifierIndentation:
   IndentationWidth: 2
 
+Layout/AlignHash:
+  EnforcedColonStyle: table
+
 Layout/EmptyLinesAroundClassBody:
   Enabled: false
 
@@ -83,7 +86,7 @@ Metrics/ParameterLists:
 Metrics/PerceivedComplexity:
   Max: 10
 
-Naming/HeredocDelimiterNaming:	
+Naming/HeredocDelimiterNaming:
   Enabled: false
 
 Naming/VariableNumber:
@@ -138,7 +141,7 @@ Style/HashSyntax:
 
 Style/IfUnlessModifier:
   Enabled: false
-  
+
 Style/NegatedIf:
   Enabled: false
 
