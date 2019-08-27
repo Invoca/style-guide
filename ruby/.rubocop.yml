@@ -86,6 +86,10 @@ Metrics/PerceivedComplexity:
 Naming/HeredocDelimiterNaming:	
   Enabled: false
 
+Naming/RescuedExceptionsVariableName:
+  Enabled: true
+  PreferredName: 'ex'
+
 Naming/VariableNumber:
   Enabled: false
 
@@ -138,7 +142,10 @@ Style/HashSyntax:
 
 Style/IfUnlessModifier:
   Enabled: false
-  
+
+Style/InverseMethods:
+  Enabled: false
+
 Style/NegatedIf:
   Enabled: false
 
