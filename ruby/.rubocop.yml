@@ -20,6 +20,10 @@ AllCops:
 Layout/AccessModifierIndentation:
   IndentationWidth: 2
 
+Layout/AlignHash:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+
 Layout/EmptyLinesAroundClassBody:
   Enabled: false
 
