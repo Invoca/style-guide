@@ -21,8 +21,7 @@ Layout/AccessModifierIndentation:
   IndentationWidth: 2
 
 Layout/AlignHash:
-  EnforcedHashRocketStyle: table
-  EnforcedColonStyle: table
+  Enabled: false
 
 Layout/EmptyLinesAroundClassBody:
   Enabled: false
