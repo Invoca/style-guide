@@ -150,14 +150,14 @@ def trailing_dot
   method.
     chain.
     chain
-end 
+end
 
 # good
 def leading_dot
   method
     .chain
     .chain
-end 
+end
 ```
 
 ### Align multiline method call chains with an indent relative the receiver
@@ -380,7 +380,7 @@ x = Math.sin(y)
 array.delete(e)
 ```
 
-### Prefer `{...}` over `do...end` for single-line blocks.  
+### Prefer `{...}` over `do...end` for single-line blocks.
 Avoid using `{...}` for multi-line blocks (multiline chaining is always
 ugly). Always use `do...end` for "control flow" and "method
 definitions" (e.g. in Rakefiles and certain DSLs).  Avoid `do...end`
@@ -610,7 +610,7 @@ This is because stabby lambda arguments are treated just like regular method arg
 lam = lambda { |a, b| a + (b || 0) }
 lam.call(1, 2)
 
-# bad - space between stabby lambda and arguments 
+# bad - space between stabby lambda and arguments
 lam = -> (a, b = 0) { a + b }
 lam.call(1, 2)
 
@@ -622,13 +622,13 @@ lam.call(1, 2)
 ### `->` (stabby lambda) syntax is preferred even for multi-line blocks
 ```ruby
 # bad
-lam = lambda do |a, b| 
+lam = lambda do |a, b|
   c = b || 0
   a + c
 end
 
 # good
-lam = ->(a, b) do 
+lam = ->(a, b) do
   c = b || 0
   a + c
 end
@@ -685,6 +685,39 @@ Examples:
 ## Classes
 
 ### Try to make your classes as [SOLID](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design\)) as possible.
+
+### Namespace Definition
+Define (and reopen) namespaced classes and modules using explicit nesting.
+Using the scope resolution operator can lead to surprising constant lookups due to Ruby's https://cirw.in/blog/constant-lookup.html[lexical scoping], which depends on the module nesting at the point of definition.
+
+```rb
+module Utilities
+  class Queue
+  end
+end
+
+# good
+module Utilities
+  class WaitingList
+    Module.nesting # => [Utilities::WaitingList, Utilities]
+
+    def initialize
+      @queue = Queue.new # Refers to Utilities::Queue
+    end
+  end
+end
+
+# bad
+class Utilities::Store
+  Module.nesting # => [Utilities::Store]
+
+  def initialize
+    # Refers to the top level ::Queue class because Utilities isn't in the
+    # current nesting chain.
+    @queue = Queue.new
+  end
+end
+```
 
 ### Use @ class variables when you want separate values per subclass.
 Use @@ variables when you want process-wide globals (such as for a process-wide cache).
@@ -940,7 +973,7 @@ is a hybrid of `Array`'s intuitive inter-operation facilities and
 ### Never modify a collection while traversing it.
 
 ### Don't use the `%w()` syntax for defining arrays
-Define them as `['a', 'b']` or `'a b'.split(' ')` 
+Define them as `['a', 'b']` or `'a b'.split(' ')`
 
 ## Strings
 
