@@ -86,7 +86,7 @@ Metrics/ParameterLists:
 Metrics/PerceivedComplexity:
   Max: 10
 
-Naming/HeredocDelimiterNaming:	
+Naming/HeredocDelimiterNaming:
   Enabled: false
 
 Naming/RescuedExceptionsVariableName:
@@ -109,7 +109,7 @@ Style/AndOr:
   EnforcedStyle: conditionals
 
 Style/ClassAndModuleChildren:
-  Enabled: false
+  Enabled: true
 
 # Mapping of methods to prefer, alternate => preferred
 Style/CollectionMethods:
