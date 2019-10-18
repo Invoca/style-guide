@@ -1,6 +1,6 @@
 # Examples of how to specifically exclude certain things
 AllCops:
-  TargetRubyVersion: 2.4.2
+  TargetRubyVersion: 2.6.1
   Exclude:
     - '**/*.yml'
     - '**/*.sql'
@@ -94,15 +94,6 @@ Naming/RescuedExceptionsVariableName:
   PreferredName: 'ex'
 
 Naming/VariableNumber:
-  Enabled: false
-
-Performance/RegexpMatch:
-  Enabled: false
-
-Performance/StringReplacement:
-  Enabled: false
-
-Performance/TimesMap:
   Enabled: false
 
 Style/AndOr:
