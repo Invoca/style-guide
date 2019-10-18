@@ -1,8 +1,6 @@
-ruby:
-  config_file: ./ruby/.rubocop.yml
-
 rubocop:
   version: 0.72.0
+  config_file: ./ruby/.rubocop.yml
 
 jshint:
   enabled: false
