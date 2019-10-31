@@ -23,7 +23,7 @@
     "space-in-parens": "error",
     "eqeqeq": "error",
     "no-unneeded-ternary": ["error", { "defaultAssignment": false }],
-    "space-before-function-paren": ["error", "never"],
+    "space-before-function-paren": ["error", { "anonymous": "never", "named": "never", "asyncArrow": "always" }],
     "semi": ["error", "always"],
     "quotes": "off",
     "array-bracket-spacing": ["error", "never"],
