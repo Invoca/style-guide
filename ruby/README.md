@@ -1018,6 +1018,8 @@ end.join
 # bad
 StdoutLogger = Logger.new(STDOUT)
 
+SUPPORTED_VERBS = [:get, :put, :post, :patch, :options]
+
 # good
 module StdoutLogger
   class << self
@@ -1026,6 +1028,9 @@ module StdoutLogger
     end
   end
 end
+
+SUPPORTED_VERBS = [:get, :put, :post, :patch, :options].freeze
+```
 
 ## Regular Expressions
 
