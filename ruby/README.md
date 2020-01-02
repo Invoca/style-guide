@@ -16,6 +16,7 @@ Any adjustments to this styleguide should be captured in the [.rubocop.yml](.rub
 * [Exceptions](#exceptions)
 * [Collections](#collections)
 * [Strings](#strings)
+* [Constants](#constants)
 * [Regular Expressions](#regular-expressions)
 * [Metaprogramming](#metaprogramming)
 * [Misc](#misc)
@@ -1009,6 +1010,26 @@ end
 html = paragraphs.map do |paragraph|
   "<p>#{paragraph}</p>"
 end.join
+```
+
+## Constants
+`CamelCase` constants should be used only to name classes and modules. `ALL_CAPS` constants should always be immutable values, and frozen to guarantee that.
+```ruby
+# bad
+StdoutLogger = Logger.new(STDOUT)
+
+SUPPORTED_VERBS = [:get, :put, :post, :patch, :options]
+
+# good
+module StdoutLogger
+  class << self
+    def logger
+      @logger ||= Logger.new(STDOUT)
+    end
+  end
+end
+
+SUPPORTED_VERBS = [:get, :put, :post, :patch, :options].freeze
 ```
 
 ## Regular Expressions
