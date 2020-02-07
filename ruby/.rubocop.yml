@@ -99,6 +99,9 @@ Naming/VariableNumber:
 Style/AndOr:
   EnforcedStyle: conditionals
 
+Style/BracesAroundHashParameters:
+  Enabled: true
+
 Style/ClassAndModuleChildren:
   Enabled: true
 

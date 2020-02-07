@@ -645,6 +645,23 @@ result = hash.map { |k, v| v + 1 }
 result = hash.map { |_, v| v + 1 }
 ```
 
+### Use '{}' when passing a hash as an argument, but not for keyword args.
+```ruby
+def foo(a:, b:)
+#...
+end
+
+foo({a: 1, b: 2}) # bad
+foo(a: 1, b: 2) # good
+
+def bar(options = {})
+# ...
+end
+
+bar(a: 1, b: 2) # bad
+bar({ a: 1, b: 2 }) # good
+```
+
 ## Naming
 
 ### Use `snake_case` for methods and variables.
