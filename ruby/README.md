@@ -706,7 +706,7 @@ Examples:
 
 ### Namespace Definition
 Define (and reopen) namespaced classes and modules using explicit nesting.
-Using the scope resolution operator can lead to surprising constant lookups due to Ruby's https://cirw.in/blog/constant-lookup.html[lexical scoping], which depends on the module nesting at the point of definition.
+Using the scope resolution operator can lead to surprising constant lookups due to Ruby's [lexical scoping](https://cirw.in/blog/constant-lookup.html), which depends on the module nesting at the point of definition.
 
 ```rb
 module Utilities
