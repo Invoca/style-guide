@@ -645,15 +645,18 @@ result = hash.map { |k, v| v + 1 }
 result = hash.map { |_, v| v + 1 }
 ```
 
-### Do not use a hash literal to destructure keyword args.
+### Do not rely on a hash being destructured into keyword args.
 ```ruby
 def foo(a:, b:)
 # ...
 end
 
 foo({ a: 1, b: 2 }) # bad
-foo(**{ a: 1, b: 2 }) # better
-foo(a: 1, b: 2) # best
+foo(a: 1, b: 2) # good
+
+params = { a: 1, b: 2 }
+foo(params) # bad
+foo(**params) # good
 ```
 
 ### Use '{}' when passing a hash as an argument for a method that also includes keyword args.
@@ -664,6 +667,16 @@ end
 
 baz(a: 1, b: 2, c: 3, d: 4) # bad
 baz({ a: 1, b: 2 }, c: 3, d: 4) # good
+```
+
+### Omit {} when passing options hashes at the end of method calls, to enable them to be converted to keyword args in the future without having to change the calling code.
+```ruby
+def bar(name, value, options = {})
+# ...
+end
+
+bar("John", 10, { a: 1, b: 2 }) # bad
+bar("John", 10, a: 1, b: 2) # good
 ```
 
 ## Naming
