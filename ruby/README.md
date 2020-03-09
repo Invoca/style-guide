@@ -645,7 +645,7 @@ result = hash.map { |k, v| v + 1 }
 result = hash.map { |_, v| v + 1 }
 ```
 
-### Do not rely on a hash being destructured into keyword args.
+### Do not rely on a hash being destructured into keyword args, because Ruby 3 will remove this implicit behavior. Instead, use `**`.
 ```ruby
 def foo(a:, b:)
 # ...
@@ -654,9 +654,9 @@ end
 foo({ a: 1, b: 2 }) # bad
 foo(a: 1, b: 2) # good
 
-params = { a: 1, b: 2 }
-foo(params) # bad
-foo(**params) # good
+options = { a: 1, b: 2 }
+foo(options) # bad
+foo(**options) # good
 ```
 
 ### Use '{}' when passing a hash as an argument for a method that also includes keyword args.
