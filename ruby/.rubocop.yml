@@ -100,7 +100,7 @@ Style/AndOr:
   EnforcedStyle: conditionals
 
 Style/BracesAroundHashParameters:
-  Enabled: true
+  Enabled: false
 
 Style/ClassAndModuleChildren:
   Enabled: true
