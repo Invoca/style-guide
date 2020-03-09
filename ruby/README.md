@@ -645,21 +645,25 @@ result = hash.map { |k, v| v + 1 }
 result = hash.map { |_, v| v + 1 }
 ```
 
-### Use '{}' when passing a hash as an argument, but not for keyword args.
+### Do not use a hash literal to destructure keyword args.
 ```ruby
 def foo(a:, b:)
-#...
-end
-
-foo({a: 1, b: 2}) # bad
-foo(a: 1, b: 2) # good
-
-def bar(options = {})
 # ...
 end
 
-bar(a: 1, b: 2) # bad
-bar({ a: 1, b: 2 }) # good
+foo({ a: 1, b: 2 }) # bad
+foo(**{ a: 1, b: 2 }) # better
+foo(a: 1, b: 2) # best
+```
+
+### Use '{}' when passing a hash as an argument for a method that also includes keyword args.
+```ruby
+def baz(options = {}, c:, d:)
+# ...
+end
+
+baz(a: 1, b: 2, c: 3, d: 4) # bad
+baz({ a: 1, b: 2 }, c: 3, d: 4) # good
 ```
 
 ## Naming
