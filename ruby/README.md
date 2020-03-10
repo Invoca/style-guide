@@ -645,21 +645,38 @@ result = hash.map { |k, v| v + 1 }
 result = hash.map { |_, v| v + 1 }
 ```
 
-### Use '{}' when passing a hash as an argument, but not for keyword args.
+### Do not rely on a hash being destructured into keyword args, because Ruby 3 will remove this implicit behavior. Instead, use `**`.
 ```ruby
 def foo(a:, b:)
-#...
-end
-
-foo({a: 1, b: 2}) # bad
-foo(a: 1, b: 2) # good
-
-def bar(options = {})
 # ...
 end
 
-bar(a: 1, b: 2) # bad
-bar({ a: 1, b: 2 }) # good
+foo({ a: 1, b: 2 }) # bad
+foo(a: 1, b: 2) # good
+
+options = { a: 1, b: 2 }
+foo(options) # bad
+foo(**options) # good
+```
+
+### Use '{}' when passing a hash as an argument for a method that also includes keyword args.
+```ruby
+def baz(options = {}, c:, d:)
+# ...
+end
+
+baz(a: 1, b: 2, c: 3, d: 4) # bad
+baz({ a: 1, b: 2 }, c: 3, d: 4) # good
+```
+
+### Omit {} when passing options hashes at the end of method calls, to enable them to be converted to keyword args in the future without having to change the calling code.
+```ruby
+def bar(name, value, options = {})
+# ...
+end
+
+bar("John", 10, { a: 1, b: 2 }) # bad
+bar("John", 10, a: 1, b: 2) # good
 ```
 
 ## Naming
