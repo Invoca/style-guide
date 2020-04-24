@@ -1046,6 +1046,17 @@ html = paragraphs.map do |paragraph|
 end.join
 ```
 
+### Formatting - Prefer Templated String Formatting
+```ruby
+# bad
+format("%s", "Hello")
+"%<greeting>s" % { greeting: "Hello" }
+
+# good
+format("%{greeting}", greeting: "Hello")
+"%{greeting}, %{user}!" % { greeting: "Hello", name: "User" }
+```
+
 ## Constants
 `CamelCase` constants should be used only to name classes and modules. `ALL_CAPS` constants should always be immutable values, and frozen to guarantee that.
 ```ruby
