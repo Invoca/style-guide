@@ -131,6 +131,12 @@ Style/EachWithObject:
 Style/EmptyMethod:
   Enabled: false
 
+Style/FormatStringToken:
+  Enabled: false
+
+Style/FormatStringToken:
+  EnforcedStyle: template
+
 Style/GuardClause:
   Enabled: false
 
