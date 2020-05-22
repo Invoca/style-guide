@@ -14,6 +14,7 @@
   "rules": {
     "indent": ["error", 2],
     "no-multi-spaces": ["error", { "exceptions": { "VariableDeclarator": true, "ImportDeclaration": true } }],
+    "no-unused-vars": ["error", { "varsIgnorePattern": "^_" }],
     "key-spacing": ["error", { "mode": "minimum" }],
     "brace-style": ["error", "1tbs", { "allowSingleLine": true }],
     "space-infix-ops": ["error", {"int32Hint": false}],
