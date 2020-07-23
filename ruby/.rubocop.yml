@@ -189,4 +189,4 @@ Style/TrailingUnderscoreVariable:
   Enabled: false
 
 Style/WordArray:
-  Enabled: brackets
+  EnforcedStyle: brackets
