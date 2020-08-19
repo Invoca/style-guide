@@ -20,7 +20,7 @@ AllCops:
 Layout/AccessModifierIndentation:
   IndentationWidth: 2
 
-Layout/AlignHash:
+Layout/HashAlignment:
   Enabled: false
 
 Layout/EmptyLinesAroundClassBody:
@@ -32,7 +32,7 @@ Layout/EndOfLine:
 Layout/ExtraSpacing:
   Enabled: false
 
-Layout/IndentHeredoc:
+Layout/HeredocIndentation:
   EnforcedStyle: unindent
 
 Layout/MultilineMethodCallIndentation:
@@ -99,8 +99,6 @@ Naming/VariableNumber:
 Style/AndOr:
   EnforcedStyle: conditionals
 
-Style/BracesAroundHashParameters:
-  Enabled: false
 
 Style/ClassAndModuleChildren:
   Enabled: true
