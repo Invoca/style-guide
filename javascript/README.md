@@ -11,7 +11,7 @@
 
 ## Source Code Layout
 
-No space before `:` in a hash; by default do not line up items 
+No space before `:` in a hash; by default do not line up items
 ```js
 // good
 var settings = {
@@ -34,7 +34,7 @@ var defaultConfig = {
 };
 ```
 
-Put opening { on same line as the function declaration or boolean expression. This matches common JavaScript convention and most IDE's default to this behavior 
+Put opening { on same line as the function declaration or boolean expression. This matches common JavaScript convention and most IDE's default to this behavior
 ```js
 // good
 function inlineness() {
@@ -55,14 +55,14 @@ function inlineness()
     alert("I'm sorry you are using that browser.");
   }
 }
- 
+
 // good
 if (inlineIf === true) {
   // do stuff
 } else {
   // do other stuff
 };
- 
+
 // BAD
 if (inlineIf === true)
 {
@@ -73,7 +73,7 @@ if (inlineIf === true)
 };
 ```
 
-Use spaces around operators, after commas, colons and semicolons, around `{` and before `}`. (But there is no need for spaces inside the empty hash `{}`.) 
+Use spaces around operators, after commas, colons and semicolons, around `{` and before `}`. (But there is no need for spaces inside the empty hash `{}`.)
 ```js
 // good
 onClick = "function() { alert('hi'); }"
@@ -116,7 +116,7 @@ render: function() {
 ```
 
 
-When possible (and you only need falsey), rely on `null` & `undefined` returning false by default 
+When possible (and you only need falsey), rely on `null` & `undefined` returning false by default
 ```js
 // good
 // when checking if var is not null, not undefined, and not false
@@ -135,7 +135,7 @@ if (myVar != null && typeof myVar == undefined) {
 }
 ```
 
-When needing to check for `undefined` explicitly, use [underscore](http://underscorejs.org/) 
+When needing to check for `undefined` explicitly, use [underscore](http://underscorejs.org/)
 ```js
 // good
 if (_.isUndefined(myVar)) {
@@ -147,13 +147,13 @@ if (typeof myVar === "undefined") {
   ...
 }
 
-// WORST: only two == 
+// WORST: only two ==
 if (typeof myVar == undefined) {
   ...
-} 
+}
 ```
 
-Use proper quotes `""` for valid JSON and `''` for html elements 
+Use proper quotes `""` for valid JSON and `''` for html elements
 ```js
 // good
 json = { key: "Valid JSON" }
@@ -164,7 +164,7 @@ json = { key: 'invalid JSON' }
 html = "<div class=\"example\" id=\"some_id\">"
 
 
-Be wary of chaining methods that may return null 
+Be wary of chaining methods that may return null
 
 // good
 var match = $(id).val().match(/\.([^.]+)$/);
@@ -198,13 +198,13 @@ var isCustom = false, isLoading = true;
 var isCustom, isLoading = false;
 ```
 
-Prefer `||` assignment over ternary 
+Prefer `||` assignment over ternary
 ```js
 // good
 var minCount = count || 0;
 
 // bad
-var minCount = count ? count : 0; 
+var minCount = count ? count : 0;
 ````
 
 #### New Lines
@@ -213,11 +213,11 @@ Blank line between methods in a "class"
 // good
 var Widget = {
   methodA: function() {
- 
+
   },
- 
+
   methodB: function() {
- 
+
   }
 }
 
@@ -251,7 +251,7 @@ case 'bar2':
 default:
   alert("default!");
 }
- 
+
 // bad
 
 switch(foo) {
@@ -269,7 +269,7 @@ default:
 ### Naming
 Follow standard JS conventions
 
-Use camelCase with leading lower case for variable names and attributes / methods 
+Use camelCase with leading lower case for variable names and attributes / methods
 
 ```js
 // good
@@ -289,7 +289,7 @@ app.view("network_edit", {
 
 ```
 
-Use CamelCase with leading upper case for class names and Backdraft app & plugin names 
+Use CamelCase with leading upper case for class names and Backdraft app & plugin names
 ```js
 // good
 Backdraft.app("InsightsManager", function(app) {
@@ -306,6 +306,30 @@ var mydiv = $(".js-find-me");
 var mydiv = $(".find-me");
 ```
 
+#### Promises
+Prefer `async/await` over `Promise.prototype.then/catch/finally`
+```js
+// good
+async () => {
+  try {
+    await onSubmit(value);
+    console.log("it succeeded");
+  } catch(error) {
+    console.log("there was an error");
+  }
+}
+
+// bad
+() => {
+  onSubmit(value)
+    .then(() => {
+      console.log("it succeeded");
+    })
+    .catch((error) => {
+      console.log("there was an error");
+    })
+}
+```
 
 
 
@@ -317,12 +341,12 @@ var mydiv = $(".find-me");
 When code can be refactored and put into better named methods / classes, we prefer that over a comment that just describes what a method does.  But comments are okay to describe an interface or a browser hack needed, etc.
 
 ### CoffeeScript
-For a period we created CoffeeScript classes and have tests written in CoffeeScript, but we are not adding new CoffeeScript. 
+For a period we created CoffeeScript classes and have tests written in CoffeeScript, but we are not adding new CoffeeScript.
 
 #### Source Code Layout
 Use two spaces per indentation level. No hard tabs.
 Coffeescript is whitespace significant, so you must be diligent about indentation!
-Insert a single newline after method definitions 
+Insert a single newline after method definitions
 ```js
 # good
 class Foo
@@ -338,10 +362,10 @@ class Foo
   run: ->
     implementation()
   jump: ->
-    implementation() 
+    implementation()
 ```
 
-Have spaces between operators in an expression 
+Have spaces between operators in an expression
 ```js
 # good
 if x > 0
@@ -352,7 +376,7 @@ if x>0
   run
 
 
-# good  
+# good
 foo = "bar"
 
 # bad - no spaces
