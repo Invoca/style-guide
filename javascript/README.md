@@ -307,7 +307,7 @@ var mydiv = $(".find-me");
 ```
 
 #### Promises
-Prefer `async/await` over `Promise.prototype.then/catch/finally`
+Prefer `async/await` over `Promise.prototype.then/catch/finally` because it's easier to write, read, debug, and test, and it's an effective way to write asynchronous code that appears synchronous.
 ```js
 // good
 async () => {
