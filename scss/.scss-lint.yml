@@ -160,8 +160,7 @@ linters:
     max_depth: 4
 
   SelectorFormat:
-    enabled: true
-    convention: hyphenated_BEM # or 'strict_BEM', or 'hyphenated_lowercase', or 'snake_case', or 'camel_case', or a regex pattern
+    enabled: false
 
   Shorthand:
     enabled: false
