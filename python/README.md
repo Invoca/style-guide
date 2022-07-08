@@ -1,10 +1,11 @@
 # Prelude
-Invoca Python Style Guide initially forked from https://github.com/bbatsov/ruby-style-guide.
+This Python Style Guide is primarily derived from [PEP 8 – Style Guide for Python Code](https://peps.python.org/pep-0008/). There are some notable exceptions which are described here. When in doubt please consult the PEP-8 guide which is included in here in both txt and markdown form. 
 
-The contents of this styleguide are to be enforced by [rubocop](https://github.com/bbatsov/rubocop)
-and automated in the code review process by [HoundCI](https://houndci.com/)
 
-Any adjustments to this styleguide should be captured in the [.rubocop.yml](.rubocop.yml) config.
+The contents of this styleguide are to be enforced by `TODO: Add linter tool`
+and automated in the code review process by `TODO: add CI tool`
+
+Any adjustments to this styleguide should be captured in the `TODO: add config file`
 
 ## Table of Contents
 
