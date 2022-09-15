@@ -1,1316 +1,1435 @@
-# Prelude
-This Python Style Guide is primarily derived from [PEP 8 – Style Guide for Python Code](https://peps.python.org/pep-0008/). There are some notable exceptions which are described here. When in doubt please consult the PEP-8 guide which is included in here in both txt and markdown form. 
-
-
-The contents of this styleguide are to be enforced by `TODO: Add linter tool`
-and automated in the code review process by `TODO: add CI tool`
-
-Any adjustments to this styleguide should be captured in the `TODO: add config file`
-
-## Table of Contents
-
-* [Source Code Layout](#source-code-layout)
-* [Syntax](#syntax)
-* [Naming](#naming)
-* [Comments](#comments)
-* [Classes](#classes)
-* [Exceptions](#exceptions)
-* [Collections](#collections)
-* [Strings](#strings)
-* [Constants](#constants)
-* [Regular Expressions](#regular-expressions)
-* [Metaprogramming](#metaprogramming)
-* [Misc](#misc)
-* [Preferred Ruby-isms](#preferred-ruby-isms)
-
-## Source Code Layout
-
-### Use two **spaces** per indentation level. No hard tabs.
-
-```ruby
-# good
-def some_method
-  do_something
-end
-
-# bad - four spaces
-def some_method
-    do_something
-end
 ```
-
-### Use spaces around operators and `=>`, after commas, colons and semicolons, around `{`
-  and before `}`.  (But there is no need for spaces inside the empty hash `{}`.)
-
-```ruby
-a, b = 1, 2 + 3
-location = { :city => 'Santa Barbara', :state => 'CA' }
-size > 10 ? 'large' : 'small'
-[1, 2, 3].each { |e| puts e }
-params = {}
+PEP: 8
+Title: Style Guide for Python Code
+Version: $Revision$
+Last-Modified: $Date$
+Author: Guido van Rossum <guido@python.org>,
+        Barry Warsaw <barry@python.org>,
+        Nick Coghlan <ncoghlan@gmail.com>
+Status: Active
+Type: Process
+Content-Type: text/x-rst
+Created: 05-Jul-2001
+Post-History: 05-Jul-2001, 01-Aug-2013
 ```
 
-The only exception is when using the exponent operator:
+# Introduction
 
-```ruby
-# bad
-e = M * c ** 2
+This document gives coding conventions for the Python code comprising
+the standard library in the main Python distribution.  Please see the
+companion informational PEP describing :pep:`style guidelines for the C code
+in the C implementation of Python <7>`.
 
-# good
-e = M * c**2
-```
+This document and :pep:`257` (Docstring Conventions) were adapted from
+Guido's original Python Style Guide essay, with some additions from
+Barry's style guide [2]_.
 
-### No spaces after `(`, `[` or before `]`, `)`.
+This style guide evolves over time as additional conventions are
+identified and past conventions are rendered obsolete by changes in
+the language itself.
 
-```ruby
-some(arg).other
-[1, 2, 3].length
-collection = []
-```
+Many projects have their own coding style guidelines. In the event of any
+conflicts, such project-specific guides take precedence for that project.
 
-### Indent `when` as deep as `case`. I know that many would disagree.
-  with this one, but it's the style established in both the "The Ruby
-  Programming Language" and "Programming Ruby".
-
-```ruby
-case
-when song.name == 'Misty'
-  puts 'Not again!'
-when song.duration > 120
-  puts 'Too long!'
-when Time.now.hour > 21
-  puts "It's too late"
-else
-  song.play
-end
-
-kind = case year
-       when 1850..1889 then 'Blues'
-       when 1890..1909 then 'Ragtime'
-       when 1910..1929 then 'New Orleans Jazz'
-       when 1930..1939 then 'Swing'
-       when 1940..1950 then 'Bebop'
-       else 'Jazz'
-       end
-```
 
-### Use empty lines between `def`s and to break up a method into logical paragraphs.
+# A Foolish Consistency is the Hobgoblin of Little Minds
 
-```ruby
-def some_method
-  data = initialize(options)
+One of Guido's key insights is that code is read much more often than
+it is written.  The guidelines provided here are intended to improve
+the readability of code and make it consistent across the wide
+spectrum of Python code.  As :pep:`20` says, "Readability counts".
 
-  data.manipulate!
+A style guide is about consistency.  Consistency with this style guide
+is important.  Consistency within a project is more important.
+Consistency within one module or function is the most important.
 
-  data.result
-end
+However, know when to be inconsistent -- sometimes style guide
+recommendations just aren't applicable.  When in doubt, use your best
+judgment.  Look at other examples and decide what looks best.  And
+don't hesitate to ask!
 
-def some_method
-  result
-end
-```
+In particular: do not break backwards compatibility just to comply with
+this PEP!
 
-### Align the parameters of a method call if they span over multiple lines using normal indent.
-
-```ruby
-# starting point (line is too long)
-def send_mail(source)
-  Mailer.deliver(to: 'bob@example.com', from: 'us@example.com', subject: 'Important message', body: source.text)
-end
-
-# good (normal indent)
-def send_mail(source)
-  Mailer.deliver(
-    to: 'bob@example.com',
-    from: 'us@example.com',
-    subject: 'Important message',
-    body: source.text)
-end
-
-# bad (double indent)
-def send_mail(source)
-  Mailer.deliver(
-      to: 'bob@example.com',
-      from: 'us@example.com',
-      subject: 'Important message',
-      body: source.text)
-end
-
-# bad
-def send_mail(source)
-  Mailer.deliver(to: 'bob@example.com',
-                 from: 'us@example.com',
-                 subject: 'Important message',
-                 body: source.text)
-end
-```
+Some other good reasons to ignore a particular guideline:
 
-### Prefer leading dot notation when chaining method calls on multiple lines
-```ruby
-# bad
-def trailing_dot
-  method.
-    chain.
-    chain
-end
-
-# good
-def leading_dot
-  method
-    .chain
-    .chain
-end
-```
+1. When applying the guideline would make the code less readable, even
+   for someone who is used to reading code that follows this PEP.
 
-### Align multiline method call chains with an indent relative the receiver
-```ruby
-# bad
-collection
-.transformA { ... }
-.transformB { ... }
- # good
-collection
-  .transformA { ... }
-  .transformB { ... }
- # good
-while myvariable
-        .a
-        .b
-   # do something
-end
- # good
-myvariable = Thing
-               .a
-               .b
-               .c
-```
+2. To be consistent with surrounding code that also breaks it (maybe
+   for historic reasons) -- although this is also an opportunity to
+   clean up someone else's mess (in true XP style).
 
-### Use RDoc and its conventions for API documentation.	### Use RDoc <Paste>
+3. Because the code in question predates the introduction of the
+   guideline and there is no other reason to be modifying that code.
 
-### Use RDoc and its conventions for API documentation.
-  Don't put an empty line between the comment block and the `def`.
+4. When the code needs to remain compatible with older versions of
+   Python that don't support the feature recommended by the style guide.
 
-### Avoid lines longer than 150 characters.
 
-### Avoid trailing whitespace.
+# Code Lay-out
 
-### Use `UTF-8` as the source file encoding when you need more than plain ASCII.
+## Indentation
 
-## Syntax
+Use 4 spaces per indentation level.
 
-### Prefer parentheses around arguments in method declaration.
- Omit the parentheses when the method doesn't accept any arguments.
+Continuation lines should align wrapped elements either vertically
+using Python's implicit line joining inside parentheses, brackets and
+braces, or using a *hanging indent* [#fn-hi]_.  When using a hanging
+indent the following should be considered; there should be no
+arguments on the first line and further indentation should be used to
+clearly distinguish itself as a continuation line::
+
+    # Correct:
 
-```ruby
-def some_method
-  ...
-end
+    # Aligned with opening delimiter.
+    foo = long_function_name(var_one, var_two,
+                             var_three, var_four)
 
-def some_method_with_arguments(arg1, arg2)
-  ...
-end
-```
+    # Add 4 spaces (an extra level of indentation) to distinguish arguments from the rest.
+    def long_function_name(
+            var_one, var_two, var_three,
+            var_four):
+        print(var_one)
 
-### Never use `for`, unless you know exactly why.
-Most of the time iterators should be used instead. `for` is implemented in terms of `each` (so
-you're adding a level of indirection), but with a twist - `for`
-doesn't introduce a new scope (unlike `each`) and variables defined
-in its block will be visible outside it.
-
-```ruby
-arr = [1, 2, 3]
-
-# bad
-for elem in arr do
-  puts elem
-end
-
-# good
-arr.each { |elem| puts elem }
-```
+    # Hanging indents should add a level.
+    foo = long_function_name(
+        var_one, var_two,
+        var_three, var_four)
 
-### Never use `then` for multi-line `if/unless`.
-
-```ruby
-# bad
-if some_condition then
-  ...
-end
-
-# good
-if some_condition
-  ...
-end
-```
+::
 
-### Use one expression per branch in a ternary operator.
-This also means that ternary operators must not be nested. Prefer
-`if/else` constructs in these cases.
-Avoid multi-line ternary; use `if/unless` instead.
-
-```ruby
-# bad
-some_condition ? (nested_condition ? nested_something : nested_something_else) : something_else
-
-# good
-if some_condition
-  nested_condition ? nested_something : nested_something_else
-else
-  something_else
-end
-```
+    # Wrong:
 
-### Use `&&/||` for boolean expressions, `and/or` for control flow.
+    # Arguments on first line forbidden when not using vertical alignment.
+    foo = long_function_name(var_one, var_two,
+        var_three, var_four)
+
+    # Further indentation required as indentation is not distinguishable.
+    def long_function_name(
+        var_one, var_two, var_three,
+        var_four):
+        print(var_one)
+
+The 4-space rule is optional for continuation lines.
+
+Optional::
+
+    # Hanging indents *may* be indented to other than 4 spaces.
+    foo = long_function_name(
+      var_one, var_two,
+      var_three, var_four)
+
+.. _`multiline if-statements`:
+
+When the conditional part of an ``if``-statement is long enough to require
+that it be written across multiple lines, it's worth noting that the
+combination of a two character keyword (i.e. ``if``), plus a single space,
+plus an opening parenthesis creates a natural 4-space indent for the
+subsequent lines of the multiline conditional.  This can produce a visual
+conflict with the indented suite of code nested inside the ``if``-statement,
+which would also naturally be indented to 4 spaces.  This PEP takes no
+explicit position on how (or whether) to further visually distinguish such
+conditional lines from the nested suite inside the ``if``-statement.
+Acceptable options in this situation include, but are not limited to::
+
+    # No extra indentation.
+    if (this_is_one_thing and
+        that_is_another_thing):
+        do_something()
 
-```ruby
-# boolean expression
-if document.text_changed? || document.settings_changed?
-  document.save!
-end
+    # Add a comment, which will provide some distinction in editors
+    # supporting syntax highlighting.
+    if (this_is_one_thing and
+        that_is_another_thing):
+        # Since both conditions are true, we can frobnicate.
+        do_something()
+
+    # Add some extra indentation on the conditional continuation line.
+    if (this_is_one_thing
+            and that_is_another_thing):
+        do_something()
+
+(Also see the discussion of whether to break before or after binary
+operators below.)
+
+The closing brace/bracket/parenthesis on multiline constructs may
+either line up under the first non-whitespace character of the last
+line of list, as in::
+
+    my_list = [
+        1, 2, 3,
+        4, 5, 6,
+        ]
+    result = some_function_that_takes_arguments(
+        'a', 'b', 'c',
+        'd', 'e', 'f',
+        )
+
+or it may be lined up under the first character of the line that
+starts the multiline construct, as in::
+
+    my_list = [
+        1, 2, 3,
+        4, 5, 6,
+    ]
+    result = some_function_that_takes_arguments(
+        'a', 'b', 'c',
+        'd', 'e', 'f',
+    )
+
+## Tabs or Spaces?
+
+Spaces are the preferred indentation method.
+
+Tabs should be used solely to remain consistent with code that is
+already indented with tabs.
+
+Python disallows mixing tabs and spaces for indentation.
+
+
+## Maximum Line Length
+
+Limit all lines to a maximum of 79 characters.
+
+For flowing long blocks of text with fewer structural restrictions
+(docstrings or comments), the line length should be limited to 72
+characters.
+
+Limiting the required editor window width makes it possible to have
+several files open side by side, and works well when using code
+review tools that present the two versions in adjacent columns.
+
+The default wrapping in most tools disrupts the visual structure of the
+code, making it more difficult to understand. The limits are chosen to
+avoid wrapping in editors with the window width set to 80, even
+if the tool places a marker glyph in the final column when wrapping
+lines. Some web based tools may not offer dynamic line wrapping at all.
+
+Some teams strongly prefer a longer line length.  For code maintained
+exclusively or primarily by a team that can reach agreement on this
+issue, it is okay to increase the line length limit up to 99 characters,
+provided that comments and docstrings are still wrapped at 72
+characters.
+
+The Python standard library is conservative and requires limiting
+lines to 79 characters (and docstrings/comments to 72).
+
+The preferred way of wrapping long lines is by using Python's implied
+line continuation inside parentheses, brackets and braces.  Long lines
+can be broken over multiple lines by wrapping expressions in
+parentheses. These should be used in preference to using a backslash
+for line continuation.
+
+Backslashes may still be appropriate at times.  For example, long,
+multiple ``with``-statements could not use implicit continuation
+before Python 3.10, so backslashes were acceptable for that case::
 
-# control flow
-document.saved? or document.save!
-```
+    with open('/path/to/some/file/you/want/to/read') as file_1, \
+         open('/path/to/some/file/being/written', 'w') as file_2:
+        file_2.write(file_1.read())
 
-Beware: `and/or` have lower precedence than `=`!
+(See the previous discussion on `multiline if-statements`_ for further
+thoughts on the indentation of such multiline ``with``-statements.)
 
-```ruby
-flag = top_of_page? or reset_page
+Another such case is with ``assert`` statements.
 
-# is equivalent to
-(flag = top_of_page?) or reset_page
+Make sure to indent the continued line appropriately.
 
-```
+## Should a Line Break Before or After a Binary Operator?
 
-### Only use trailing `if/unless` when they are rare footnotes that can be ignored in the usual, "go-right" case.
-That is, the statement you start with should almost always execute.
-  (A good alternative for assertions and other one-line code that rarely executes is control-flow `and/or`.)
+For decades the recommended style was to break after binary operators.
+But this can hurt readability in two ways: the operators tend to get
+scattered across different columns on the screen, and each operator is
+moved away from its operand and onto the previous line.  Here, the eye
+has to do extra work to tell which items are added and which are
+subtracted::
 
-```ruby
-# bad -- the raise rarely executes
-raise ArgumentError, "name must be provided" unless name.present?
+    # Wrong:
+    # operators sit far away from their operands
+    income = (gross_wages +
+              taxable_interest +
+              (dividends - qualified_dividends) -
+              ira_deduction -
+              student_loan_interest)
 
-# good
-name.present? or raise ArgumentError, "name must be provided"
+To solve this readability problem, mathematicians and their publishers
+follow the opposite convention.  Donald Knuth explains the traditional
+rule in his *Computers and Typesetting* series: "Although formulas
+within a paragraph always break after binary operations and relations,
+displayed formulas always break before binary operations" [3]_.
 
-# good -- the unless is a rare footnote
-format(page) unless page.already_formatted?
+Following the tradition from mathematics usually results in more
+readable code::
 
-# good -- the if is almost always true
-send_notification(users) if users.any?
-```
+    # Correct:
+    # easy to match operators with operands
+    income = (gross_wages
+              + taxable_interest
+              + (dividends - qualified_dividends)
+              - ira_deduction
+              - student_loan_interest)
 
-### Never use `unless` with `else`. Rewrite these with the positive case first.
-
-```ruby
-# bad
-unless success?
-  puts 'failure'
-else
-  puts 'success'
-end
-
-# good
-if success?
-  puts 'success'
-else
-  puts 'failure'
-end
-```
+In Python code, it is permissible to break before or after a binary
+operator, as long as the convention is consistent locally.  For new
+code Knuth's style is suggested.
 
-### Don't use parentheses around the condition of an `if/unless/while`, unless the condition contains an assignment.
-(see "Using the return value of `=`" below).
-
-```ruby
-# bad
-if (x > 10)
-  ...
-end
-
-# good
-if x > 10
-  ...
-end
-
-# ok
-if (x = self.next_value)
-  ...
-end
-```
+## Blank Lines
 
-### Favor modifier `while/until` usage when you have a single-line body.
+Surround top-level function and class definitions with two blank
+lines.
 
-```ruby
-# bad
-while some_condition
-  do_something
-end
+Method definitions inside a class are surrounded by a single blank
+line.
 
-# good
-do_something while some_condition
-```
+Extra blank lines may be used (sparingly) to separate groups of
+related functions.  Blank lines may be omitted between a bunch of
+related one-liners (e.g. a set of dummy implementations).
 
-### Favor `until` over `while` for negative conditions.
+Use blank lines in functions, sparingly, to indicate logical sections.
 
-```ruby
-# bad
-do_something while !some_condition
+Python accepts the control-L (i.e. ^L) form feed character as
+whitespace; many tools treat these characters as page separators, so
+you may use them to separate pages of related sections of your file.
+Note, some editors and web-based code viewers may not recognize
+control-L as a form feed and will show another glyph in its place.
 
-# good
-do_something until some_condition
-```
+## Source File Encoding
 
-### Omit parentheses around parameters for methods that are part of an internal DSL
-(e.g. Rake, Rails, RSpec), methods that are with
-"keyword" status in Ruby (e.g. `attr_reader`, `puts`) and attribute
-access methods. It is preferred to use parentheses around the arguments of all other
-method invocations.
+Code in the core Python distribution should always use UTF-8, and should not
+have an encoding declaration.
 
-```ruby
-class Person
-  attr_reader :name, :age
+In the standard library, non-UTF-8 encodings should be used only for
+test purposes. Use non-ASCII characters sparingly, preferably only to
+denote places and human names. If using non-ASCII characters as data,
+avoid noisy Unicode characters like z̯̯͡a̧͎̺l̡͓̫g̹̲o̡̼̘ and byte order
+marks.
 
-  ...
-end
+All identifiers in the Python standard library MUST use ASCII-only
+identifiers, and SHOULD use English words wherever feasible (in many
+cases, abbreviations and technical terms are used which aren't
+English).
 
-temperance = Person.new('Temperance', 30)
-temperance.name
+Open source projects with a global audience are encouraged to adopt a
+similar policy.
 
-puts temperance.age
+## Imports
 
-x = Math.sin(y)
-array.delete(e)
-```
+- Imports should usually be on separate lines::
 
-### Prefer `{...}` over `do...end` for single-line blocks.
-Avoid using `{...}` for multi-line blocks (multiline chaining is always
-ugly). Always use `do...end` for "control flow" and "method
-definitions" (e.g. in Rakefiles and certain DSLs).  Avoid `do...end`
-when chaining.
-
-```ruby
-names = ['Bozhidar', 'Steve', 'Sarah']
-
-# good
-names.each { |name| puts name }
-
-# bad
-names.each do |name|
-  puts name
-end
-
-# good
-names.select { |name| name.start_with?('S') }.map { |name| name.upcase }
-
-# bad
-names.select do |name|
-  name.start_with?('S')
-end.map { |name| name.upcase }
-```
+       # Correct:
+       import os
+       import sys
 
-Some will argue that multiline chaining would look OK with the use of {...}, but they should
-ask themselves: is this code really readable and can't the blocks contents be extracted into
-nifty methods?
-
-### Avoid `return` where not needed for flow of control. Prefer `if`/`else` or `&&`/`||`.
-(Omitting `return` is more succinct and declarative, and your code will still work if you refactor it into a block later.)
-
-```ruby
-# bad
-def some_method(some_arr)
-  return some_arr.size
-end
-
-# good
-def some_method(some_arr)
-  some_arr.size
-end
-
-# bad
-def click_url
-  return "http://#{click_domain}/c" if click_domain.nonblank?
-  return click_url_for_hostname(vanity_domain) if vanity_domain.nonblank?
-  click_url_for_hostname(CLICK_URL_DEFAULT_DOMAIN)
-end
-
-# good
-def click_url
-  if click_domain.nonblank?
-    "http://#{click_domain}/c"
-  elsif vanity_domain.nonblank?
-    click_url_for_hostname(vanity_domain)
-  else
-    click_url_for_hostname(CLICK_URL_DEFAULT_DOMAIN)
-  end
-end
-
-# bad
-def should_redirect?
-  return false unless rendered?
-  return true if redirect_location.nonblank?
-  return true if global_redirect?
-  return false
-end
-
-# good
-def should_redirect?
-  !rendered && (redirect_location.nonblank? || global_redirect?)
-end
-
-# better still
-def have_redirect?
-  redirect_location.nonblank? || global_redirect?
-end
-
-def should_redirect?
-  !rendered && have_redirect?
-end
-```
+  ::
 
-### Only use `self` when required for calling a self write accessor.
-
-```ruby
-# bad
-def ready?
-  if self.last_reviewed_at > self.last_updated_at
-    self.worker.update(self.content, self.options)
-    self.status = :in_progress
-  end
-  self.status == :verified
-end
-
-# good
-def ready?
-  if last_reviewed_at > last_updated_at
-    worker.update(content, options)
-    self.status = :in_progress
-  end
-  status == :verified
-end
-```
+       # Wrong:
+       import sys, os
 
-### As a corollary, avoid shadowing methods with local variables unless they are both equivalent.
-
-```ruby
-class Foo
-  attr_accessor :options
-
-  # ok
-  def initialize(options)
-    self.options = options
-    # both options and self.options are equivalent here
-  end
-
-  # bad
-  def do_something(options = {})
-    unless options[:when] == :later
-      output(self.options[:message])
-    end
-  end
-
-  # good
-  def do_something(params = {})
-    unless params[:when] == :later
-      output(options[:message])
-    end
-  end
-end
-```
 
-### Use spaces around the `=` operator when assigning default values to method parameters:
-
-```ruby
-# bad
-def some_method(arg1=:default, arg2=nil, arg3=[])
-  # do something...
-end
-
-# good
-def some_method(arg1 = :default, arg2 = nil, arg3 = [])
-  # do something...
-end
-```
+  It's okay to say this though::
 
-While several Ruby books suggest the first style, the second is much more prominent
-in practice (and arguably a bit more readable).
+      # Correct:
+      from subprocess import Popen, PIPE
 
-### Avoid line continuation (\\) unless absolutely required.
+- Imports are always put at the top of the file, just after any module
+  comments and docstrings, and before module globals and constants.
 
-```ruby
-# bad
-result = 1 \
-         - 2
+  Imports should be grouped in the following order:
 
-# better
-result = 1 -
-         2
-```
+  1. Standard library imports.
+  2. Related third party imports.
+  3. Local application/library specific imports.
 
-### Using the return value of `=` (an assignment) is OK.
-But surround the assignment with parentheses to make it clear you are not mistakenly using `=` when you meant `==`.
+  You should put a blank line between each group of imports.
 
-```ruby
-# good - shows intended use of assignment
-if (v = array.grep(/foo/)) ...
+- Absolute imports are recommended, as they are usually more readable
+  and tend to be better behaved (or at least give better error
+  messages) if the import system is incorrectly configured (such as
+  when a directory inside a package ends up on ``sys.path``)::
 
-# bad
-if v = array.grep(/foo/) ...
+      import mypkg.sibling
+      from mypkg import sibling
+      from mypkg.sibling import example
 
-# also good - shows intended use of assignment and has correct precedence.
-if (v = next_value) == 'hello' ...
-```
+  However, explicit relative imports are an acceptable alternative to
+  absolute imports, especially when dealing with complex package layouts
+  where using absolute imports would be unnecessarily verbose::
 
-### Don't use `||=` to initialize boolean variables.
-(Consider what would happen if the current value happened to be `false`.)
+      from . import sibling
+      from .sibling import example
 
-```ruby
-# bad - would set enabled to true even if it was false
-enabled ||= true
+  Standard library code should avoid complex package layouts and always
+  use absolute imports.
 
-# good
-enabled = true if enabled.nil?
-```
+- When importing a class from a class-containing module, it's usually
+  okay to spell this::
 
-### Avoid using Perl-style special variables (like `$0-9`, `$``, etc. ).
-They are cryptic and global.
+      from myclass import MyClass
+      from foo.bar.yourclass import YourClass
 
-### Never put a space between a method name and the opening parenthesis.
+  If this spelling causes local name clashes, then spell them explicitly::
 
-```ruby
-# bad
-f (3 + 2) + 1
+      import myclass
+      import foo.bar.yourclass
 
-# good
-f(3 + 2) + 1
-```
+  and use "myclass.MyClass" and "foo.bar.yourclass.YourClass".
 
-### Ruby 1.9 hash literal syntax is preferred when the hash keys are symbols.
+- Wildcard imports (``from <module> import *``) should be avoided, as
+  they make it unclear which names are present in the namespace,
+  confusing both readers and many automated tools. There is one
+  defensible use case for a wildcard import, which is to republish an
+  internal interface as part of a public API (for example, overwriting
+  a pure Python implementation of an interface with the definitions
+  from an optional accelerator module and exactly which definitions
+  will be overwritten isn't known in advance).
 
-```ruby
-# bad
-hash = { :one => 1, :two => 2 }
+  When republishing names this way, the guidelines below regarding
+  public and internal interfaces still apply.
 
-# good
-hash = { one: 1, two: 2 }
-```
+## Module Level Dunder Names
 
-### `->` / `lambda` are preferred over `proc`/`Proc.new`.
+Module level "dunders" (i.e. names with two leading and two trailing
+underscores) such as ``__all__``, ``__author__``, ``__version__``,
+etc. should be placed after the module docstring but before any import
+statements *except* ``from __future__`` imports.  Python mandates that
+future-imports must appear in the module before any other code except
+docstrings::
 
-This is because `lambda`s enforce argument list cardinality and have unsurprising `return` semantics.
-(Only use `proc` if you really need a return statement that returns from the enclosing code.)
-More details [here](http://en.wikibooks.org/wiki/Ruby_Programming/Syntax/Method_Calls#Understanding_blocks.2C_Procs_and_methods).
+    """This is the example module.
 
-### `->` (stabby lambda) syntax is preferred when there are arguments.
+    This module does stuff.
+    """
 
-This is because stabby lambda arguments are treated just like regular method arguments. For example, these special arguments work for stabby lambda but not `lambda` or `Proc.new`:
-* default arguments
-* keyword arguments
-* block (`&`) argument
+    from __future__ import barry_as_FLUFL
 
-```ruby
-# bad
-lam = lambda { |a, b| a + (b || 0) }
-lam.call(1, 2)
+    __all__ = ['a', 'b', 'c']
+    __version__ = '0.1'
+    __author__ = 'Cardinal Biggles'
 
-# bad - space between stabby lambda and arguments
-lam = -> (a, b = 0) { a + b }
-lam.call(1, 2)
+    import os
+    import sys
 
-# good
-lam = ->(a, b = 0) { a + b }
-lam.call(1, 2)
-```
 
-### `->` (stabby lambda) syntax is preferred even for multi-line blocks
-```ruby
-# bad
-lam = lambda do |a, b|
-  c = b || 0
-  a + c
-end
-
-# good
-lam = ->(a, b) do
-  c = b || 0
-  a + c
-end
-```
+# String Quotes
 
-### Use `_` for unused block parameters.
+In Python, single-quoted strings and double-quoted strings are the
+same.  This PEP does not make a recommendation for this.  Pick a rule
+and stick to it.  When a string contains single or double quote
+characters, however, use the other one to avoid backslashes in the
+string. It improves readability.
 
-```ruby
-# bad
-result = hash.map { |k, v| v + 1 }
+For triple-quoted strings, always use double quote characters to be
+consistent with the docstring convention in :pep:`257`.
 
-# good
-result = hash.map { |_, v| v + 1 }
-```
 
-### Do not rely on a hash being destructured into keyword args, because Ruby 3 will remove this implicit behavior. Instead, use `**`.
-```ruby
-def foo(a:, b:)
-# ...
-end
-
-foo({ a: 1, b: 2 }) # bad
-foo(a: 1, b: 2) # good
-
-options = { a: 1, b: 2 }
-foo(options) # bad
-foo(**options) # good
-```
+# Whitespace in Expressions and Statements
 
-### Use '{}' when passing a hash as an argument for a method that also includes keyword args.
-```ruby
-def baz(options = {}, c:, d:)
-# ...
-end
-
-baz(a: 1, b: 2, c: 3, d: 4) # bad
-baz({ a: 1, b: 2 }, c: 3, d: 4) # good
-```
+## Pet Peeves
 
-### Omit {} when passing options hashes at the end of method calls, to enable them to be converted to keyword args in the future without having to change the calling code.
-```ruby
-def bar(name, value, options = {})
-# ...
-end
-
-bar("John", 10, { a: 1, b: 2 }) # bad
-bar("John", 10, a: 1, b: 2) # good
-```
+Avoid extraneous whitespace in the following situations:
 
-## Naming
+- Immediately inside parentheses, brackets or braces::
 
-### Use `snake_case` for methods and variables.
+     # Correct:
+     spam(ham[1], {eggs: 2})
 
-### Use `CamelCase` for classes and modules. Keep acronyms like HTTP, RFC, XML uppercase when possible. (Upper case words cause problems for rails routes.)
+  ::
 
-### Use `SCREAMING_SNAKE_CASE` for other constants.
+    # Wrong:
+    spam( ham[ 1 ], { eggs: 2 } )
 
-### The names of predicate methods (methods that return a boolean value) should end in a question mark.
-  (e.g. `Array#empty?`)
+- Between a trailing comma and a following close parenthesis::
 
-### The names of potentially "dangerous" or surprising methods should end in an exclamation mark!
-(e.g. methods that have side-effects like mutating a variable or changing the process flow)
+      # Correct:
+      foo = (0,)
 
-### Prefer
-  * `map` over `collect`
-  * `reduce` over `inject`
-  * `find` over `detect`
-  * `select` over `find_all`
-  * `size` over `length`
+  ::
 
-### Company names with capitals in the middle (e.g. RingRevenue) should drop the inner capitalization so that rails string helpers don't insert underscores in the middle
-Examples:
-* RingRevenue: Constantize: Ringrevenue, underscored: ringrevenue
-* HubSpot     => Hubspot hubspot
-* HubspotIntegration => hubspot_integration
+      # Wrong:
+      bar = (0, )
 
-## Comments
+- Immediately before a comma, semicolon, or colon::
 
-> Good code is its own best documentation. As you're about to add a
-> comment, ask yourself, "How can I improve the code so that this
-> comment isn't needed?" Improve the code and then document it to make
-> it even clearer. <br/>
-> -- Steve McConnell
+      # Correct:
+      if x == 4: print(x, y); x, y = y, x
 
-### Enough said.
+  ::
 
+      # Wrong:
+      if x == 4 : print(x , y) ; x , y = y , x
 
-## Classes
+- However, in a slice the colon acts like a binary operator, and
+  should have equal amounts on either side (treating it as the
+  operator with the lowest priority).  In an extended slice, both
+  colons must have the same amount of spacing applied.  Exception:
+  when a slice parameter is omitted, the space is omitted::
 
-### Try to make your classes as [SOLID](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design\)) as possible.
+      # Correct:
+      ham[1:9], ham[1:9:3], ham[:9:3], ham[1::3], ham[1:9:]
+      ham[lower:upper], ham[lower:upper:], ham[lower::step]
+      ham[lower+offset : upper+offset]
+      ham[: upper_fn(x) : step_fn(x)], ham[:: step_fn(x)]
+      ham[lower + offset : upper + offset]
 
-### Namespace Definition
-Define (and reopen) namespaced classes and modules using explicit nesting.
-Using the scope resolution operator can lead to surprising constant lookups due to Ruby's [lexical scoping](https://cirw.in/blog/constant-lookup.html), which depends on the module nesting at the point of definition.
+  ::
 
-```rb
-module Utilities
-  class Queue
-  end
-end
+      # Wrong:
+      ham[lower + offset:upper + offset]
+      ham[1: 9], ham[1 :9], ham[1:9 :3]
+      ham[lower : : upper]
+      ham[ : upper]
 
-# good
-module Utilities
-  class WaitingList
-    Module.nesting # => [Utilities::WaitingList, Utilities]
+- Immediately before the open parenthesis that starts the argument
+  list of a function call::
 
-    def initialize
-      @queue = Queue.new # Refers to Utilities::Queue
-    end
-  end
-end
+      # Correct:
+      spam(1)
 
-# bad
-class Utilities::Store
-  Module.nesting # => [Utilities::Store]
+  ::
 
-  def initialize
-    # Refers to the top level ::Queue class because Utilities isn't in the
-    # current nesting chain.
-    @queue = Queue.new
-  end
-end
-```
+      # Wrong:
+      spam (1)
 
-### Use @ class variables when you want separate values per subclass.
-Use @@ variables when you want process-wide globals (such as for a process-wide cache).
+- Immediately before the open parenthesis that starts an indexing or
+  slicing::
 
-```ruby
-class Parent
-  @@class_var = 'parent'
+      # Correct:
+      dct['key'] = lst[index]
 
-  def self.print_class_var
-    puts @@class_var
-  end
-end
+  ::
 
-class Child < Parent
-  @@class_var = 'child'
-end
+      # Wrong:
+      dct ['key'] = lst [index]
 
-Parent.print_class_var # => will print "child"
-```
+- More than one space around an assignment (or other) operator to
+  align it with another::
 
-As you can see all the classes in a class hierarchy actually share one
-class variable. Class instance variables should usually be preferred
-over class variables.
+      # Correct:
+      x = 1
+      y = 2
+      long_variable = 3
 
-### Assign proper visibility levels to methods (`private`, `protected`) in accordance with their intended usage.
+  ::
 
-### Indent the `public`, `protected`, and `private` methods as much the method definitions they apply to. Leave one blank line above and below them.
+      # Wrong:
+      x             = 1
+      y             = 2
+      long_variable = 3
 
-```ruby
-class SomeClass
-  def public_method
-    ...
-  end
+## Other Recommendations
 
-  private
+- Avoid trailing whitespace anywhere.  Because it's usually invisible,
+  it can be confusing: e.g. a backslash followed by a space and a
+  newline does not count as a line continuation marker.  Some editors
+  don't preserve it and many projects (like CPython itself) have
+  pre-commit hooks that reject it.
 
-  def private_method
-    ...
-  end
-end
-```
+- Always surround these binary operators with a single space on either
+  side: assignment (``=``), augmented assignment (``+=``, ``-=``
+  etc.), comparisons (``==``, ``<``, ``>``, ``!=``, ``<>``, ``<=``,
+  ``>=``, ``in``, ``not in``, ``is``, ``is not``), Booleans (``and``,
+  ``or``, ``not``).
 
-### Use `class << self` or `def self.method` to define singleton methods so you don't have to repeat the class name (Don't Repeat Yourself).
-
-```ruby
-class TestClass
-  # bad
-  def TestClass.some_method
-    ...
-  end
-
-  # good
-  def self.some_other_method
-    ...
-  end
-
-  # best
-  # this form lets you define many class methods,
-  # and public/private
-  # and attr_reader work as expected.
-  class << self
-    def first_method
-      ...
-    end
-
-    private
-
-    def second_method_etc
-      ...
-    end
-  end
-end
-```
+- If operators with different priorities are used, consider adding
+  whitespace around the operators with the lowest priority(ies). Use
+  your own judgment; however, never use more than one space, and
+  always have the same amount of whitespace on both sides of a binary
+  operator::
 
-## Exceptions
-
-### Never return from an `ensure` block.
-If you explicitly return from a
-method inside an `ensure` block, the return will take precedence over
-any exception being raised, and the method will return as if no
-exception had been raised at all. In effect, the exception will be
-silently thrown away.
-
-```ruby
-def foo
-  begin
-    fail
-  ensure
-    return 'very bad idea'
-  end
-end
-```
+      # Correct:
+      i = i + 1
+      submitted += 1
+      x = x*2 - 1
+      hypot2 = x*x + y*y
+      c = (a+b) * (a-b)
 
-### Use *implicit begin blocks* when possible.
-
-```ruby
-# bad
-def foo
-  begin
-    # main logic goes here
-  rescue
-    # failure handling goes here
-  end
-end
-
-# good
-def foo
-  # main logic goes here
-rescue
-  # failure handling goes here
-end
-```
+  ::
 
-### Mitigate the proliferation of `begin` blocks by using *contingency methods* (a term coined by Avdi Grimm).
-
-```ruby
-# bad
-begin
-  something_that_might_fail
-rescue IOError
-  # handle IOError
-end
-
-begin
-  something_else_that_might_fail
-rescue IOError
-  # handle IOError
-end
-
-# good
-def with_io_error_handling
-   yield
-rescue IOError
-  # handle IOError
-end
-
-with_io_error_handling { something_that_might_fail }
-
-with_io_error_handling { something_else_that_might_fail }
-```
+      # Wrong:
+      i=i+1
+      submitted +=1
+      x = x * 2 - 1
+      hypot2 = x * x + y * y
+      c = (a + b) * (a - b)
 
-### Don't suppress exceptions.
-
-```ruby
-# bad
-begin
-  # an exception occurs here
-rescue SomeError
-  # the rescue clause does absolutely nothing
-end
-
-# bad
-do_something rescue nil
-```
+- Function annotations should use the normal rules for colons and
+  always have spaces around the ``->`` arrow if present.  (See
+  `Function Annotations`_ below for more about function annotations.)::
 
-### Don't use exceptions for flow of control.
-
-```ruby
-# bad
-begin
-  n / d
-rescue ZeroDivisionError
-  puts 'Cannot divide by 0!'
-end
-
-# good
-if d.zero?
-  puts 'Cannot divide by 0!'
-else
-  n / d
-end
-```
+      # Correct:
+      def munge(input: AnyStr): ...
+      def munge() -> PosInt: ...
 
-### Avoid rescuing the `Exception` class.  This will trap signals and calls to `exit`, requiring you to `kill -9` the process.
-
-```ruby
-# bad
-begin
-  # calls to exit and kill signals will be caught (except kill -9)
-  exit
-rescue Exception
-  puts "you didn't really want to exit, right?"
-  # exception handling
-end
-
-# good
-begin
-  # a blind rescue rescues from StandardError, not Exception as many
-  # programmers assume.
-rescue => e
-  # exception handling
-end
-
-# also good
-begin
-  # an exception occurs here
-
-rescue StandardError => e
-  # exception handling
-end
-```
+  ::
 
-### Put more specific exceptions higher up the rescue chain, otherwise they'll never be rescued from.
-
-```ruby
-# bad
-begin
-  # some code
-rescue Exception => e
-  # some handling
-rescue StandardError => e
-  # some handling
-end
-
-# good
-begin
-  # some code
-rescue StandardError => e
-  # some handling
-rescue Exception => e
-  # some handling
-end
-```
+      # Wrong:
+      def munge(input:AnyStr): ...
+      def munge()->PosInt: ...
 
-### Release external resources obtained by your program in an ensure block.
-
-```ruby
-f = File.open('testfile')
-begin
-  # .. process
-rescue
-  # .. handle error
-ensure
-  f.close unless f.nil?
-end
-```
+- Don't use spaces around the ``=`` sign when used to indicate a
+  keyword argument, or when used to indicate a default value for an
+  *unannotated* function parameter::
 
-### Use exceptions from the standard library for simple cases so you can avoid introducing new exception classes.
+      # Correct:
+      def complex(real, imag=0.0):
+          return magic(r=real, i=imag)
 
-### If you create a custom exception class, always inherit from `StandardError` not `Exception`
+  ::
 
-## Collections
+      # Wrong:
+      def complex(real, imag = 0.0):
+          return magic(r = real, i = imag)
 
-### Use `Set` instead of `Array` when dealing with unique elements.
-`Set` implements a collection of unordered values with no duplicates. This
-is a hybrid of `Array`'s intuitive inter-operation facilities and
-`Hash`'s fast lookup.
 
-### Avoid the use of mutable object as hash keys.
+  When combining an argument annotation with a default value, however, do use
+  spaces around the ``=`` sign::
 
-### Rely on the fact that hashes in 1.9 are ordered.
+      # Correct:
+      def munge(sep: AnyStr = None): ...
+      def munge(input: AnyStr, sep: AnyStr = None, limit=1000): ...
 
-### Never modify a collection while traversing it.
+  ::
 
-### Don't use the `%w()` syntax for defining arrays
-Define them as `['a', 'b']` or `'a b'.split(' ')`
+      # Wrong:
+      def munge(input: AnyStr=None): ...
+      def munge(input: AnyStr, limit = 1000): ...
 
-## Strings
+- Compound statements (multiple statements on the same line) are
+  generally discouraged::
 
-### Prefer string interpolation instead of string concatenation:
+      # Correct:
+      if foo == 'blah':
+          do_blah_thing()
+      do_one()
+      do_two()
+      do_three()
 
-```ruby
-# bad
-email_with_name = user.name + ' <' + user.email + '>'
+  Rather not::
 
-# good
-email_with_name = "#{user.name} <#{user.email}>"
-```
+      # Wrong:
+      if foo == 'blah': do_blah_thing()
+      do_one(); do_two(); do_three()
 
-### `String#<<` performs better by mutating the string in place.
-`String#+`, avoids mutation (which is good in a functional way) but therefore runs slower since it creates a new string object.
+- While sometimes it's okay to put an if/for/while with a small body
+  on the same line, never do this for multi-clause statements.  Also
+  avoid folding such long lines!
 
-```ruby
-# faster
-html = ''
+  Rather not::
 
-paragraphs.each do |paragraph|
-  html << "<p>#{paragraph}</p>"
-end
+      # Wrong:
+      if foo == 'blah': do_blah_thing()
+      for x in lst: total += x
+      while t < 10: t = delay()
 
-# more functional but slower
-html = ''
+  Definitely not::
 
-paragraphs.each do |paragraph|
-  html += "<p>#{paragraph}</p>"
-end
+      # Wrong:
+      if foo == 'blah': do_blah_thing()
+      else: do_non_blah_thing()
 
-# most functional
-html = paragraphs.map do |paragraph|
-  "<p>#{paragraph}</p>"
-end.join
-```
+      try: something()
+      finally: cleanup()
 
-### Formatting - Prefer Templated String Formatting
-```ruby
-# bad
-format("%s", "Hello")
-"%<greeting>s" % { greeting: "Hello" }
-
-# good
-format("%{greeting}", greeting: "Hello")
-"%{greeting}, %{user}!" % { greeting: "Hello", name: "User" }
-```
+      do_one(); do_two(); do_three(long, argument,
+                                   list, like, this)
 
-## Constants
-`CamelCase` constants should be used only to name classes and modules. `ALL_CAPS` constants should always be immutable values, and frozen to guarantee that.
-```ruby
-# bad
-StdoutLogger = Logger.new(STDOUT)
-
-SUPPORTED_VERBS = [:get, :put, :post, :patch, :options]
-
-# good
-module StdoutLogger
-  class << self
-    def logger
-      @logger ||= Logger.new(STDOUT)
-    end
-  end
-end
-
-SUPPORTED_VERBS = [:get, :put, :post, :patch, :options].freeze
-```
+      if foo == 'blah': one(); two(); three()
 
-## Regular Expressions
 
-### Don't use a regular expression when a plain string will do:
+# When to Use Trailing Commas
 
-```ruby
-# bad
-if command[/quit/]
-  ...
-end
+Trailing commas are usually optional, except they are mandatory when
+making a tuple of one element.  For clarity, it is recommended to
+surround the latter in (technically redundant) parentheses::
 
-# good
-if command['quit']
-  ...
-end
-```
+    # Correct:
+    FILES = ('setup.cfg',)
 
-### For simple constructions you can use regexp directly through string index.
+::
 
-```ruby
-match = string[/regexp/]             # get content of matched regexp
-first_group = string[/text(grp)/, 1] # get content of captured group
-string[/text (grp)/, 1] = 'replace'  # string => 'text replace'
-```
+    # Wrong:
+    FILES = 'setup.cfg',
 
-### Avoid using $1-9 as it can be hard to track what they contain and they live globally. Numbered indexes or named groups can be used instead.
-
-```ruby
-# bad
-/\A(https?):/ =~ url
-...
-setup_connection($1)
-
-# good
-protocol = url[/\A(https?):/, 1]
-...
-setup_connection(protocol)
-
-# good
-/\A(?<protocol>https?):/ =~ url
-...
-setup_connection(protocol)
-```
+When trailing commas are redundant, they are often helpful when a
+version control system is used, when a list of values, arguments or
+imported items is expected to be extended over time.  The pattern is
+to put each value (etc.) on a line by itself, always adding a trailing
+comma, and add the close parenthesis/bracket/brace on the next line.
+However it does not make sense to have a trailing comma on the same
+line as the closing delimiter (except in the above case of singleton
+tuples)::
 
-### Be careful not to use `^` and `$` for anchors (like in other languages) because in Ruby they also match newlines.
-For anchors, use `\A` and `\z` (not to be confused with `\Z` which is the equivalent of `/\n?\z/`).
+    # Correct:
+    FILES = [
+        'setup.cfg',
+        'tox.ini',
+        ]
+    initialize(FILES,
+               error=True,
+               )
 
-```ruby
-string = "some injection\nusername"
-string[/^username$/]   # matches
-string[/\Ausername\z/] # don't match
-```
+::
 
-### Use `x` modifier for complex regexps so that you can use whitespace and comments to make them more readable.
-Just be careful as spaces are ignored.
-
-```ruby
-regexp = %r{
-  start         # some text
-  \s            # white space char
-  (group)       # first group
-  (?:alt1|alt2) # some alternation
-  end
-}x
-```
+    # Wrong:
+    FILES = ['setup.cfg', 'tox.ini',]
+    initialize(FILES, error=True,)
 
-### For complex replacements `sub`/`gsub` can be used with a block or hash.
 
-## Metaprogramming
+# Comments
 
-### Only use metaprogramming when necessary.
-For example, `deliver_<mail_message>` in TMail was completely
-unnecessary since it was equivalent to simply `deliver(:mail_message)`.
+Comments that contradict the code are worse than no comments.  Always
+make a priority of keeping the comments up-to-date when the code
+changes!
 
-### Do not monkey patch core classes unless you really need to change their behavior.
-Generally across all code in the process including other gems and libraries (separation of concerns!):
+Comments should be complete sentences.  The first word should be
+capitalized, unless it is an identifier that begins with a lower case
+letter (never alter the case of identifiers!).
 
-```ruby
-# bad
-class Fixnum
-  def days
-    ...
-  end
-end
-```
+Block comments generally consist of one or more paragraphs built out of
+complete sentences, with each sentence ending in a period.
 
-### The block form of `class_eval` is preferable to the string-interpolated form.
-  - when you use the string-interpolated form, always supply `__FILE__` and `__LINE__`, so that your backtraces make sense:
+You should use two spaces after a sentence-ending period in multi-
+sentence comments, except after the final sentence.
 
-```ruby
-class_eval 'def use_relative_model_naming?; true; end', __FILE__, __LINE__
-```
+Ensure that your comments are clear and easily understandable to other 
+speakers of the language you are writing in.
 
-  - `define_method` is preferable to `class_eval { def ... }`
-
-### Avoid `method_missing` if possible.
-Backtraces become messy; the behavior is not listed in `#methods`; misspelled method calls might silently work (`nukes.launch_state = false`).
-Consider using delegation, proxy, or `define_method` instead.  If you must, use `method_missing`,
-  - be sure to [also define `respond_to_missing?`](http://blog.marc-andre.ca/2010/11/methodmissing-politely.html)
-  - only catch methods with a well-defined prefix, such as `find_by_*` -- make your code as assertive as possible.
-  - call `super` at the end of your statement
-  - delegate to a reusable, testable, non-magical method:
-
-```ruby
-# bad
-def method_missing?(meth, *args, &block)
-  if /^find_by_(?<prop>.*)/ =~ meth
-    # ... lots of code to do a find_by
-  else
-    super
-  end
-end
-
-# good
-def method_missing?(meth, *args, &block)
-  if /^find_by_(?<prop>.*)/ =~ meth
-    find_by(prop, *args, &block)
-  else
-    super
-  end
-end
-
-# best of all, though, would be to define_method as each findable attribute is declared
-```
+Python coders from non-English speaking countries: please write your
+comments in English, unless you are 120% sure that the code will never
+be read by people who don't speak your language.
 
-## Misc
-
-### Write `ruby -w` safe code when practical.
-Try an editor that will show you these when you save.
-
-### When code patterns are repeated, use separate lines and extra whitespace when practical to align columns so that the code is tabular.
-This makes the patterns obvious which helps to spot/prevent bugs.
-
-```ruby
-# bad
-PROMOTIONAL_METHODS = [
-                [ 'review_site', 'Content / Review Site'],
-                [ 'coupon_site', 'Discount / Coupon Site' ],
-                [ 'display', 'Display' ],
-                [ 'email', 'Email' ],
-                [ 'rewards', 'Rewards / Incentive' ],
-                [ 'leads', 'Lead Form / Co Reg' ],
-                [ 'search', 'Search' ],
-                [ 'social_media', 'Social Media' ],
-                [ 'software', 'Software' ],
-                [ 'other', 'Other' ]
-              ],
-...
-# good
-  PROMOTIONAL_METHODS = [
-                [ 'review_site',  'Content / Review Site'],
-                [ 'coupon_site',  'Discount / Coupon Site' ],
-                [ 'display',      'Display' ],
-                [ 'email',        'Email' ],
-                [ 'rewards',      'Rewards / Incentive' ],
-                [ 'leads',        'Lead Form / Co Reg' ],
-                [ 'search',       'Search' ],
-                [ 'social_media', 'Social Media' ],
-                [ 'software',     'Software' ],
-                [ 'other',        'Other' ]
-              ],
-...
-# bad
-      params = {
-        'phone' => calling_phone_number.to_param,
-        'LastName' => last_name,
-        'FirstName' => first_name,
-        'Address' => primary_address,
-        'ApartmentNum' => secondary_address,
-        'City' => city_name,
-        'State' => state,
-        'Zipcode' => zip
-      }
-...
-# good
-      params = {
-        'phone'         => calling_phone_number.to_param,
-        'LastName'      => last_name,
-        'FirstName'     => first_name,
-        'Address'       => primary_address,
-        'ApartmentNum'  => secondary_address,
-        'City'          => city_name,
-        'State'         => state,
-        'Zipcode'       => zip
-      }
-```
+## Block Comments
 
-### Prefer code written in the functional style
-avoid side-effects like object mutation unless required by performance concerns.
- Mutating arguments is a side-effect so don't do it unless that is the sole purpose of the method.
-* Don't put required parameters into options hashes.
+Block comments generally apply to some (or all) code that follows
+them, and are indented to the same level as that code.  Each line of a
+block comment starts with a ``#`` and a single space (unless it is
+indented text inside the comment).
 
-### Try to keep methods to 10 lines of code or less.
-Ideally, most methods will be shorter than 5 lines of code. Comments and empty lines do not count.
+Paragraphs inside a block comment are separated by a line containing a
+single ``#``.
 
-### Try to keep parameter lists limited to three or four parameters.
+## Inline Comments
 
-### Avoid `alias` when `alias_method` will do.
+Use inline comments sparingly.
 
-### Use `OptionParser` for parsing complex command line options and
-`ruby -s` for trivial command line options.
+An inline comment is a comment on the same line as a statement.
+Inline comments should be separated by at least two spaces from the
+statement.  They should start with a # and a single space.
 
-## Preferred Ruby-isms
+Inline comments are unnecessary and in fact distracting if they state
+the obvious.  Don't do this::
 
-Items under this section are designed to help clarify design patterns common in our Ruby code. These patterns are designed to help in various ways, including but not limited to:
+    x = x + 1                 # Increment x
 
-1. Avoiding common bugs
-2. Creating code that is more:
-   * maintainable
-   * understandable
-   * extendable
-   * intention revealing
+But sometimes, this is useful::
 
-### Casting Booleans with `!!`
+    x = x + 1                 # Compensate for border
 
-A common ruby-ism for casting booleans is to precede the method call(s) with `!!`. By calling the negation operator twice, we cast to a boolean twice. The first is the negated boolean (e.g. nil => true) and the second converts the new boolean to the original truthiness (e.g. nil => true => false).
+## Documentation Strings
 
-This style should be used when truthiness is not acceptable, and a `true` or `false` value is required or expected.
+Conventions for writing good documentation strings
+(a.k.a. "docstrings") are immortalized in :pep:`257`.
 
-##### Useful
-```ruby
-# JSON expects true/false, not truthiness
-def to_json
-  record = find_by_id(1)
-  {
-    record_exists: !!record
-  }
-end
+- Write docstrings for all public modules, functions, classes, and
+  methods.  Docstrings are not necessary for non-public methods, but
+  you should have a comment that describes what the method does.  This
+  comment should appear after the ``def`` line.
 
-```
-##### Unnecessary
-```ruby
-# The if only needs truthiness, not explicit true or false
-if !!User.find_by_id(1)
-  ...
-end
-```
+- :pep:`257` describes good docstring conventions.  Note that most
+  importantly, the ``"""`` that ends a multiline docstring should be
+  on a line by itself::
+
+      """Return a foobang
+
+      Optional plotz says to frobnicate the bizbaz first.
+      """
+
+- For one liner docstrings, please keep the closing ``"""`` on
+  the same line::
+
+      """Return an ex-parrot."""
+
+
+# Naming Conventions
+==================
+
+The naming conventions of Python's library are a bit of a mess, so
+we'll never get this completely consistent -- nevertheless, here are
+the currently recommended naming standards.  New modules and packages
+(including third party frameworks) should be written to these
+standards, but where an existing library has a different style,
+internal consistency is preferred.
+
+## Overriding Principle
+
+Names that are visible to the user as public parts of the API should
+follow conventions that reflect usage rather than implementation.
+
+## Descriptive: Naming Styles
+
+There are a lot of different naming styles.  It helps to be able to
+recognize what naming style is being used, independently from what
+they are used for.
+
+The following naming styles are commonly distinguished:
+
+- ``b`` (single lowercase letter)
+- ``B`` (single uppercase letter)
+- ``lowercase``
+- ``lower_case_with_underscores``
+- ``UPPERCASE``
+- ``UPPER_CASE_WITH_UNDERSCORES``
+- ``CapitalizedWords`` (or CapWords, or CamelCase -- so named because
+  of the bumpy look of its letters [4]_).  This is also sometimes known
+  as StudlyCaps.
+
+  Note: When using acronyms in CapWords, capitalize all the
+  letters of the acronym.  Thus HTTPServerError is better than
+  HttpServerError.
+- ``mixedCase`` (differs from CapitalizedWords by initial lowercase
+  character!)
+- ``Capitalized_Words_With_Underscores`` (ugly!)
+
+There's also the style of using a short unique prefix to group related
+names together.  This is not used much in Python, but it is mentioned
+for completeness.  For example, the ``os.stat()`` function returns a
+tuple whose items traditionally have names like ``st_mode``,
+``st_size``, ``st_mtime`` and so on.  (This is done to emphasize the
+correspondence with the fields of the POSIX system call struct, which
+helps programmers familiar with that.)
+
+The X11 library uses a leading X for all its public functions.  In
+Python, this style is generally deemed unnecessary because attribute
+and method names are prefixed with an object, and function names are
+prefixed with a module name.
+
+In addition, the following special forms using leading or trailing
+underscores are recognized (these can generally be combined with any
+case convention):
+
+- ``_single_leading_underscore``: weak "internal use" indicator.
+  E.g. ``from M import *`` does not import objects whose names start
+  with an underscore.
+
+- ``single_trailing_underscore_``: used by convention to avoid
+  conflicts with Python keyword, e.g. ::
+
+      tkinter.Toplevel(master, class_='ClassName')
+
+- ``__double_leading_underscore``: when naming a class attribute,
+  invokes name mangling (inside class FooBar, ``__boo`` becomes
+  ``_FooBar__boo``; see below).
+
+- ``__double_leading_and_trailing_underscore__``: "magic" objects or
+  attributes that live in user-controlled namespaces.
+  E.g. ``__init__``, ``__import__`` or ``__file__``.  Never invent
+  such names; only use them as documented.
+
+## Prescriptive: Naming Conventions
+
+### Names to Avoid
+
+Never use the characters 'l' (lowercase letter el), 'O' (uppercase
+letter oh), or 'I' (uppercase letter eye) as single character variable
+names.
+
+In some fonts, these characters are indistinguishable from the
+numerals one and zero.  When tempted to use 'l', use 'L' instead.
+
+### ASCII Compatibility
+
+Identifiers used in the standard library must be ASCII compatible
+as described in the
+:pep:`policy section <3131#policy-specification>`
+of :pep:`3131`.
+
+### Package and Module Names
+
+Modules should have short, all-lowercase names.  Underscores can be
+used in the module name if it improves readability.  Python packages
+should also have short, all-lowercase names, although the use of
+underscores is discouraged.
+
+When an extension module written in C or C++ has an accompanying
+Python module that provides a higher level (e.g. more object oriented)
+interface, the C/C++ module has a leading underscore
+(e.g. ``_socket``).
+
+### Class Names
+
+Class names should normally use the CapWords convention.
+
+The naming convention for functions may be used instead in cases where
+the interface is documented and used primarily as a callable.
+
+Note that there is a separate convention for builtin names: most builtin
+names are single words (or two words run together), with the CapWords
+convention used only for exception names and builtin constants.
+
+### Type Variable Names
+
+Names of type variables introduced in :pep:`484` should normally use CapWords
+preferring short names: ``T``, ``AnyStr``, ``Num``. It is recommended to add
+suffixes ``_co`` or ``_contra`` to the variables used to declare covariant
+or contravariant behavior correspondingly::
+
+    from typing import TypeVar
+
+    VT_co = TypeVar('VT_co', covariant=True)
+    KT_contra = TypeVar('KT_contra', contravariant=True)
+
+### Exception Names
+
+Because exceptions should be classes, the class naming convention
+applies here.  However, you should use the suffix "Error" on your
+exception names (if the exception actually is an error).
+
+### Global Variable Names
+
+(Let's hope that these variables are meant for use inside one module
+only.)  The conventions are about the same as those for functions.
+
+Modules that are designed for use via ``from M import *`` should use
+the ``__all__`` mechanism to prevent exporting globals, or use the
+older convention of prefixing such globals with an underscore (which
+you might want to do to indicate these globals are "module
+non-public").
+
+### Function and Variable Names
+
+Function names should be lowercase, with words separated by
+underscores as necessary to improve readability.
+
+Variable names follow the same convention as function names.
+
+mixedCase is allowed only in contexts where that's already the
+prevailing style (e.g. threading.py), to retain backwards
+compatibility.
+
+### Function and Method Arguments
+
+Always use ``self`` for the first argument to instance methods.
+
+Always use ``cls`` for the first argument to class methods.
+
+If a function argument's name clashes with a reserved keyword, it is
+generally better to append a single trailing underscore rather than
+use an abbreviation or spelling corruption.  Thus ``class_`` is better
+than ``clss``.  (Perhaps better is to avoid such clashes by using a
+synonym.)
+
+### Method Names and Instance Variables
+
+Use the function naming rules: lowercase with words separated by
+underscores as necessary to improve readability.
+
+Use one leading underscore only for non-public methods and instance
+variables.
+
+To avoid name clashes with subclasses, use two leading underscores to
+invoke Python's name mangling rules.
+
+Python mangles these names with the class name: if class Foo has an
+attribute named ``__a``, it cannot be accessed by ``Foo.__a``.  (An
+insistent user could still gain access by calling ``Foo._Foo__a``.)
+Generally, double leading underscores should be used only to avoid
+name conflicts with attributes in classes designed to be subclassed.
+
+Note: there is some controversy about the use of __names (see below).
+
+### Constants
+
+Constants are usually defined on a module level and written in all
+capital letters with underscores separating words.  Examples include
+``MAX_OVERFLOW`` and ``TOTAL``.
+
+### Designing for Inheritance
+
+Always decide whether a class's methods and instance variables
+(collectively: "attributes") should be public or non-public.  If in
+doubt, choose non-public; it's easier to make it public later than to
+make a public attribute non-public.
+
+Public attributes are those that you expect unrelated clients of your
+class to use, with your commitment to avoid backwards incompatible
+changes.  Non-public attributes are those that are not intended to be
+used by third parties; you make no guarantees that non-public
+attributes won't change or even be removed.
+
+We don't use the term "private" here, since no attribute is really
+private in Python (without a generally unnecessary amount of work).
+
+Another category of attributes are those that are part of the
+"subclass API" (often called "protected" in other languages).  Some
+classes are designed to be inherited from, either to extend or modify
+aspects of the class's behavior.  When designing such a class, take
+care to make explicit decisions about which attributes are public,
+which are part of the subclass API, and which are truly only to be
+used by your base class.
+
+With this in mind, here are the Pythonic guidelines:
+
+- Public attributes should have no leading underscores.
+
+- If your public attribute name collides with a reserved keyword,
+  append a single trailing underscore to your attribute name.  This is
+  preferable to an abbreviation or corrupted spelling.  (However,
+  notwithstanding this rule, 'cls' is the preferred spelling for any
+  variable or argument which is known to be a class, especially the
+  first argument to a class method.)
+
+  Note 1: See the argument name recommendation above for class methods.
+
+- For simple public data attributes, it is best to expose just the
+  attribute name, without complicated accessor/mutator methods.  Keep
+  in mind that Python provides an easy path to future enhancement,
+  should you find that a simple data attribute needs to grow
+  functional behavior.  In that case, use properties to hide
+  functional implementation behind simple data attribute access
+  syntax.
+
+  Note 1: Try to keep the functional behavior side-effect free,
+  although side-effects such as caching are generally fine.
+
+  Note 2: Avoid using properties for computationally expensive
+  operations; the attribute notation makes the caller believe that
+  access is (relatively) cheap.
+
+- If your class is intended to be subclassed, and you have attributes
+  that you do not want subclasses to use, consider naming them with
+  double leading underscores and no trailing underscores.  This
+  invokes Python's name mangling algorithm, where the name of the
+  class is mangled into the attribute name.  This helps avoid
+  attribute name collisions should subclasses inadvertently contain
+  attributes with the same name.
+
+  Note 1: Note that only the simple class name is used in the mangled
+  name, so if a subclass chooses both the same class name and attribute
+  name, you can still get name collisions.
+
+  Note 2: Name mangling can make certain uses, such as debugging and
+  ``__getattr__()``, less convenient.  However the name mangling
+  algorithm is well documented and easy to perform manually.
+
+  Note 3: Not everyone likes name mangling.  Try to balance the
+  need to avoid accidental name clashes with potential use by
+  advanced callers.
+
+## Public and Internal Interfaces
+
+Any backwards compatibility guarantees apply only to public interfaces.
+Accordingly, it is important that users be able to clearly distinguish
+between public and internal interfaces.
+
+Documented interfaces are considered public, unless the documentation
+explicitly declares them to be provisional or internal interfaces exempt
+from the usual backwards compatibility guarantees. All undocumented
+interfaces should be assumed to be internal.
+
+To better support introspection, modules should explicitly declare the
+names in their public API using the ``__all__`` attribute. Setting
+``__all__`` to an empty list indicates that the module has no public API.
+
+Even with ``__all__`` set appropriately, internal interfaces (packages,
+modules, classes, functions, attributes or other names) should still be
+prefixed with a single leading underscore.
+
+An interface is also considered internal if any containing namespace
+(package, module or class) is considered internal.
+
+Imported names should always be considered an implementation detail.
+Other modules must not rely on indirect access to such imported names
+unless they are an explicitly documented part of the containing module's
+API, such as ``os.path`` or a package's ``__init__`` module that exposes
+functionality from submodules.
+
+
+# Programming Recommendations
+
+- Code should be written in a way that does not disadvantage other
+  implementations of Python (PyPy, Jython, IronPython, Cython, Psyco,
+  and such).
+
+  For example, do not rely on CPython's efficient implementation of
+  in-place string concatenation for statements in the form ``a += b``
+  or ``a = a + b``.  This optimization is fragile even in CPython (it
+  only works for some types) and isn't present at all in implementations
+  that don't use refcounting.  In performance sensitive parts of the
+  library, the ``''.join()`` form should be used instead.  This will
+  ensure that concatenation occurs in linear time across various
+  implementations.
+
+- Comparisons to singletons like None should always be done with
+  ``is`` or ``is not``, never the equality operators.
+
+  Also, beware of writing ``if x`` when you really mean ``if x is not
+  None`` -- e.g. when testing whether a variable or argument that
+  defaults to None was set to some other value.  The other value might
+  have a type (such as a container) that could be false in a boolean
+  context!
+
+- Use ``is not`` operator rather than ``not ... is``.  While both
+  expressions are functionally identical, the former is more readable
+  and preferred::
+
+      # Correct:
+      if foo is not None:
+
+  ::
+
+      # Wrong:
+      if not foo is None:
+
+- When implementing ordering operations with rich comparisons, it is
+  best to implement all six operations (``__eq__``, ``__ne__``,
+  ``__lt__``, ``__le__``, ``__gt__``, ``__ge__``) rather than relying
+  on other code to only exercise a particular comparison.
+
+  To minimize the effort involved, the ``functools.total_ordering()``
+  decorator provides a tool to generate missing comparison methods.
+
+  :pep:`207` indicates that reflexivity rules *are* assumed by Python.
+  Thus, the interpreter may swap ``y > x`` with ``x < y``, ``y >= x``
+  with ``x <= y``, and may swap the arguments of ``x == y`` and ``x !=
+  y``.  The ``sort()`` and ``min()`` operations are guaranteed to use
+  the ``<`` operator and the ``max()`` function uses the ``>``
+  operator.  However, it is best to implement all six operations so
+  that confusion doesn't arise in other contexts.
+
+- Always use a def statement instead of an assignment statement that binds
+  a lambda expression directly to an identifier::
+
+      # Correct:
+      def f(x): return 2*x
+
+  ::
+
+      # Wrong:
+      f = lambda x: 2*x
+
+  The first form means that the name of the resulting function object is
+  specifically 'f' instead of the generic '<lambda>'. This is more
+  useful for tracebacks and string representations in general. The use
+  of the assignment statement eliminates the sole benefit a lambda
+  expression can offer over an explicit def statement (i.e. that it can
+  be embedded inside a larger expression)
+
+- Derive exceptions from ``Exception`` rather than ``BaseException``.
+  Direct inheritance from ``BaseException`` is reserved for exceptions
+  where catching them is almost always the wrong thing to do.
+
+  Design exception hierarchies based on the distinctions that code
+  *catching* the exceptions is likely to need, rather than the locations
+  where the exceptions are raised. Aim to answer the question
+  "What went wrong?" programmatically, rather than only stating that
+  "A problem occurred" (see :pep:`3151` for an example of this lesson being
+  learned for the builtin exception hierarchy)
+
+  Class naming conventions apply here, although you should add the
+  suffix "Error" to your exception classes if the exception is an
+  error.  Non-error exceptions that are used for non-local flow control
+  or other forms of signaling need no special suffix.
+
+- Use exception chaining appropriately. ``raise X from Y``
+  should be used to indicate explicit replacement without losing the
+  original traceback.
+
+  When deliberately replacing an inner exception (using ``raise X from
+  None``), ensure that relevant details are transferred to the new
+  exception (such as preserving the attribute name when converting
+  KeyError to AttributeError, or embedding the text of the original
+  exception in the new exception message).
+
+- When catching exceptions, mention specific exceptions whenever
+  possible instead of using a bare ``except:`` clause::
+
+      try:
+          import platform_specific_module
+      except ImportError:
+          platform_specific_module = None
+
+  A bare ``except:`` clause will catch SystemExit and
+  KeyboardInterrupt exceptions, making it harder to interrupt a
+  program with Control-C, and can disguise other problems.  If you
+  want to catch all exceptions that signal program errors, use
+  ``except Exception:`` (bare except is equivalent to ``except
+  BaseException:``).
+
+  A good rule of thumb is to limit use of bare 'except' clauses to two
+  cases:
+
+  1. If the exception handler will be printing out or logging the
+     traceback; at least the user will be aware that an error has
+     occurred.
+
+  2. If the code needs to do some cleanup work, but then lets the
+     exception propagate upwards with ``raise``.  ``try...finally``
+     can be a better way to handle this case.
+
+- When catching operating system errors, prefer the explicit exception
+  hierarchy introduced in Python 3.3 over introspection of ``errno``
+  values.
+
+- Additionally, for all try/except clauses, limit the ``try`` clause
+  to the absolute minimum amount of code necessary.  Again, this
+  avoids masking bugs::
+
+      # Correct:
+      try:
+          value = collection[key]
+      except KeyError:
+          return key_not_found(key)
+      else:
+          return handle_value(value)
+
+  ::
+
+      # Wrong:
+      try:
+          # Too broad!
+          return handle_value(collection[key])
+      except KeyError:
+          # Will also catch KeyError raised by handle_value()
+          return key_not_found(key)
+
+- When a resource is local to a particular section of code, use a
+  ``with`` statement to ensure it is cleaned up promptly and reliably
+  after use. A try/finally statement is also acceptable.
+
+- Context managers should be invoked through separate functions or methods
+  whenever they do something other than acquire and release resources::
+
+      # Correct:
+      with conn.begin_transaction():
+          do_stuff_in_transaction(conn)
+
+  ::
+
+      # Wrong:
+      with conn:
+          do_stuff_in_transaction(conn)
+
+  The latter example doesn't provide any information to indicate that
+  the ``__enter__`` and ``__exit__`` methods are doing something other
+  than closing the connection after a transaction.  Being explicit is
+  important in this case.
+
+- Be consistent in return statements.  Either all return statements in
+  a function should return an expression, or none of them should.  If
+  any return statement returns an expression, any return statements
+  where no value is returned should explicitly state this as ``return
+  None``, and an explicit return statement should be present at the
+  end of the function (if reachable)::
+
+      # Correct:
+
+      def foo(x):
+          if x >= 0:
+              return math.sqrt(x)
+          else:
+              return None
+
+      def bar(x):
+          if x < 0:
+              return None
+          return math.sqrt(x)
+
+  ::
+
+      # Wrong:
+
+      def foo(x):
+          if x >= 0:
+              return math.sqrt(x)
+
+      def bar(x):
+          if x < 0:
+              return
+          return math.sqrt(x)
+
+- Use ``''.startswith()`` and ``''.endswith()`` instead of string
+  slicing to check for prefixes or suffixes.
+
+  startswith() and endswith() are cleaner and less error prone::
+
+      # Correct:
+      if foo.startswith('bar'):
+
+  ::
+
+      # Wrong:
+      if foo[:3] == 'bar':
+
+- Object type comparisons should always use isinstance() instead of
+  comparing types directly::
+
+      # Correct:
+      if isinstance(obj, int):
+
+  ::
+
+      # Wrong:
+      if type(obj) is type(1):
+
+- For sequences, (strings, lists, tuples), use the fact that empty
+  sequences are false::
+
+      # Correct:
+      if not seq:
+      if seq:
+
+  ::
+
+      # Wrong:
+      if len(seq):
+      if not len(seq):
+
+- Don't write string literals that rely on significant trailing
+  whitespace.  Such trailing whitespace is visually indistinguishable
+  and some editors (or more recently, reindent.py) will trim them.
+
+- Don't compare boolean values to True or False using ``==``::
+
+      # Correct:
+      if greeting:
+
+  ::
+
+      # Wrong:
+      if greeting == True:
+
+  Worse::
+
+      # Wrong:
+      if greeting is True:
+
+- Use of the flow control statements ``return``/``break``/``continue``
+  within the finally suite of a ``try...finally``, where the flow control
+  statement would jump outside the finally suite, is discouraged.  This
+  is because such statements will implicitly cancel any active exception
+  that is propagating through the finally suite::
+
+      # Wrong:
+      def foo():
+          try:
+              1 / 0
+          finally:
+              return 42
+
+## Function Annotations
+
+With the acceptance of :pep:`484`, the style rules for function
+annotations have changed.
+
+- Function annotations should use :pep:`484` syntax (there are some
+  formatting recommendations for annotations in the previous section).
+
+- The experimentation with annotation styles that was recommended
+  previously in this PEP is no longer encouraged.
+
+- However, outside the stdlib, experiments within the rules of :pep:`484`
+  are now encouraged.  For example, marking up a large third party
+  library or application with :pep:`484` style type annotations,
+  reviewing how easy it was to add those annotations, and observing
+  whether their presence increases code understandability.
+
+- The Python standard library should be conservative in adopting such
+  annotations, but their use is allowed for new code and for big
+  refactorings.
+
+- For code that wants to make a different use of function annotations
+  it is recommended to put a comment of the form::
+
+      # type: ignore
+
+  near the top of the file; this tells type checkers to ignore all
+  annotations.  (More fine-grained ways of disabling complaints from
+  type checkers can be found in :pep:`484`.)
+
+- Like linters, type checkers are optional, separate tools.  Python
+  interpreters by default should not issue any messages due to type
+  checking and should not alter their behavior based on annotations.
+
+- Users who don't want to use type checkers are free to ignore them.
+  However, it is expected that users of third party library packages
+  may want to run type checkers over those packages.  For this purpose
+  :pep:`484` recommends the use of stub files: .pyi files that are read
+  by the type checker in preference of the corresponding .py files.
+  Stub files can be distributed with a library, or separately (with
+  the library author's permission) through the typeshed repo [5]_.
+
+
+## Variable Annotations
+
+:pep:`526` introduced variable annotations. The style recommendations for them are
+similar to those on function annotations described above:
+
+- Annotations for module level variables, class and instance variables,
+  and local variables should have a single space after the colon.
+
+- There should be no space before the colon.
+
+- If an assignment has a right hand side, then the equality sign should have
+  exactly one space on both sides::
+
+      # Correct:
+
+      code: int
+
+      class Point:
+          coords: Tuple[int, int]
+          label: str = '<unknown>'
+
+  ::
+
+      # Wrong:
+
+      code:int  # No space after colon
+      code : int  # Space before colon
+
+      class Test:
+          result: int=0  # No spaces around equality sign
+
+- Although the :pep:`526` is accepted for Python 3.6, the variable annotation
+  syntax is the preferred syntax for stub files on all versions of Python
+  (see :pep:`484` for details).
+
+.. rubric:: Footnotes
+
+.. [#fn-hi] *Hanging indentation* is a type-setting style where all
+   the lines in a paragraph are indented except the first line.  In
+   the context of Python, the term is used to describe a style where
+   the opening parenthesis of a parenthesized statement is the last
+   non-whitespace character of the line, with subsequent lines being
+   indented until the closing parenthesis.
+
+
+# References
+
+.. [2] Barry's GNU Mailman style guide
+       http://barry.warsaw.us/software/STYLEGUIDE.txt
+
+.. [3] Donald Knuth's *The TeXBook*, pages 195 and 196.
+
+.. [4] http://www.wikipedia.com/wiki/CamelCase
+
+.. [5] Typeshed repo
+   https://github.com/python/typeshed
+
+
+
+# Copyright
+
+This document has been placed in the public domain.
+
+
+
+..
+   Local Variables:
+   mode: indented-text
+   indent-tabs-mode: nil
+   sentence-end-double-space: t
+   fill-column: 70
+   coding: utf-8
+   End:
