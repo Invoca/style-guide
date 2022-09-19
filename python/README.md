@@ -25,7 +25,7 @@ Any adjustments to this styleguide should be captured in the [tox.ini](tox.ini) 
 
 ## PEP-20: The Zen of Python
 
-[PEP-20](https://peps.python.org/pep-0020/#the-zen-of-python) defines the so-called Zen of Python which is a set of principles for writing clean, idiomatic python code. Where PEP-8 is prescriptive, this is much more abstract and interpretive. While this shouldn't be taken as scripture, it useful to apply these abstract principles when faced with ambiguity.
+[PEP-20](https://peps.python.org/pep-0020/#the-zen-of-python) defines the so-called Zen of Python which is a set of principles for writing clean, idiomatic python code. Where PEP-8 is prescriptive, this is much more abstract and interpretive. While this shouldn't be taken as scripture, it may be useful to apply these abstract principles when faced with ambiguity.
 
 ```text
 Beautiful is better than ugly.
