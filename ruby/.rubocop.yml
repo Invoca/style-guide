@@ -1,6 +1,6 @@
 # Examples of how to specifically exclude certain things
 AllCops:
-  TargetRubyVersion: 2.6.1
+  TargetRubyVersion: 2.7.5
   Exclude:
     - '**/*.yml'
     - '**/*.sql'
@@ -12,6 +12,7 @@ AllCops:
     - '**/db/migrate/**/*.rb'
     - '**/db/schema.rb'
     - !ruby/regexp /old_and_unused\.rb$/
+  NewCops: enable
 
 # Configure cops for styles that we do not adhere to or are not agreed upon
 # Default settings and options can be viewed here: https://raw.githubusercontent.com/bbatsov/rubocop/master/config/default.yml
