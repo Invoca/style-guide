@@ -21,9 +21,6 @@ AllCops:
 Layout/AccessModifierIndentation:
   IndentationWidth: 2
 
-Layout/HashAlignment:
-  Enabled: false
-
 Layout/EmptyLinesAroundClassBody:
   Enabled: false
 
@@ -32,6 +29,14 @@ Layout/EndOfLine:
 
 Layout/ExtraSpacing:
   Enabled: false
+
+Layout/HashAlignment:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 150
+  Exclude:
+    - '**/*_test.rb'
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented_relative_to_receiver
@@ -69,11 +74,6 @@ Metrics/ClassLength:
 
 Metrics/CyclomaticComplexity:
   Max: 10
-
-Metrics/LineLength:
-  Max: 150
-  Exclude:
-    - '**/*_test.rb'
 
 Metrics/MethodLength:
   Max: 20
