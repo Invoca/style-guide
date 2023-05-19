@@ -188,3 +188,24 @@ Style/TrailingUnderscoreVariable:
 
 Style/WordArray:
   EnforcedStyle: brackets
+
+#### FACTORIES ####
+
+RSpec/FactoryBot/AttributeDefinedStatically:
+  Enabled: true
+
+RSpec/FactoryBot/ConsistentParenthesesStyle:
+  Enabled: true
+
+RSpec/FactoryBot/CreateList:
+  Enabled: true
+
+RSpec/FactoryBot/FactoryClassName:
+  Enabled: true
+
+RSpec/FactoryBot/FactoryNameStyle:
+  Enabled: true
+
+RSpec/FactoryBot/SyntaxMethods:
+  Enabled: true
+
