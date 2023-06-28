@@ -97,7 +97,7 @@ Naming/RescuedExceptionsVariableName:
 Naming/VariableNumber:
   Enabled: false
 
-RSpec/NotToNot
+RSpec/NotToNot:
   Enabled: false
 
 Style/AndOr:
