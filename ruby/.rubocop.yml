@@ -4,7 +4,6 @@ AllCops:
   Exclude:
     - '**/*.yml'
     - '**/*.sql'
-    - 'config/**/*'
     - 'vendor/bundle/**/*'
     - 'vendor/gems/**/*'
     - 'node_modules/**/*'
