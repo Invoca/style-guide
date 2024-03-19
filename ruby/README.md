@@ -716,10 +716,105 @@ Examples:
 
 ### Enough said.
 
+## SOLID Object Oriented Design
+These concepts should be applied generally when writing Object Oriented Code. [Read More Here](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design\))
 
+### Single Responsibility Principle in More Detail
+> "Gather together the things that change for the same reasons. Separate those things that change for different reasons."
+> -- Robert C. Martin
+
+Design your classes such that all public methods relate to a singular purpose.
+Similarly, define your methods such that each only accomplishes a single task.
+
+> TIP: Describe your class aloud and listen for usage of the word: "AND"
+
+```ruby
+# BAD
+class CorrectionProcessor
+  # This is the singular purpose of the class, "Takes parameters and processes a correction"
+  def process
+    if (response = call_third_party_api["response"]) && response["code"] == 200
+      Correction.new(*params)
+      write_to_logs("success!")
+    elsif response["code"] == 403
+      write_to_logs("unauthorized")
+    end
+  end
+
+  # Problem: Unnecessary Public Method
+  def write_to_logs(message)
+    # Problem: Constructing a custom logger might require changes
+    # as soon as we need to improving logging across the application.
+    Rails.logger.new.log_info(message)
+  end
+
+  private
+  # Problem: Unencapsulated API behavior -- this class might require changes
+  # as soon as this third party API changes.
+  def call_third_party_api
+    response = Http.get('www.invoca.net').response
+    JSON.parse(response)
+  end
+end
+```
+
+We've extracted logging to a module which can be reused and have established a contract between this class and the module. So long as `log_info` is maintained, Logging can be freely extended.
+```ruby
+module Logging
+  def log_info(message)
+    logger.log_info(message)
+  end
+
+  private
+
+  def logger
+    @logger ||= Rails.logger.new
+  end
+end
+
+class CorrectionProcessor
+  include Logging
+
+  def process
+    if invoca_api_call.success?
+      Correction.new(*params)
+      log_info("success!")
+    elsif invoca_api_call.unauthorized?
+      log_info("unauthorized")
+    end
+  end
+
+  # continued below..
+```
+
+We've extracted API Handling to a class which simplifies the understanding of CorrectionProcessor, in doing so, we've established that InvocaApiCall should have public methods (`success?` and `unauthorized?`) that CorrectionProcessor rely on -- future API updates can be accomplished so long as these methods are untouched.
+```ruby
+  private
+
+  def invoca_api_call
+    @invoca_api_call ||= InvocaApiCall.new
+  end
+end
+
+class InvocaApiCall
+  def initialize
+    @response = JSON.parse(perform_api_call)
+  end
+
+  def perform_api_call
+    Net::Http.get('www.invoca.net')
+  end
+
+  def success?
+    @response["code"] == "200"
+  end
+
+  def unauthorized?
+    @response["code"] == "403"
+  end
+end
+```
 ## Classes
-
-### Try to make your classes as [SOLID](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design\)) as possible.
 
 ### Namespace Definition
 Define (and reopen) namespaced classes and modules using explicit nesting.
