@@ -760,6 +760,7 @@ end
 
 We've extracted logging to a module which can be reused and have established a contract between this class and the module. So long as `log_info` is maintained, Logging can be freely extended.
 ```ruby
+# Good
 module Logging
   def log_info(message)
     logger.log_info(message)
@@ -789,6 +790,7 @@ class CorrectionProcessor
 
 We've extracted API Handling to a class which simplifies the understanding of CorrectionProcessor, in doing so, we've established that InvocaApiCall should have public methods (`success?` and `unauthorized?`) that CorrectionProcessor rely on -- future API updates can be accomplished so long as these methods are untouched.
 ```ruby
+# Good
   private
 
   def invoca_api_call
