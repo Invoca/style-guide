@@ -935,7 +935,7 @@ Similarly, define your methods such that each only accomplishes a single task.
 Generally, prefer Composing objects of behavior rather than relying on Inheriting behavior because inheritance, especially after 2nd and 3rd levels of inheritance, becomes vastly harder to understand.
 
 #### Composition Over Inheritance
-When faced with at least two (though some would argue three) examples of code reuse, extract that code reuse into a module or object which represents that behavior.
+When faced with at least two (though some would argue three) examples of code reuse, extract that code reuse into a well-named module or object which represents that behavior.
 
 <details closed><summary>Examples</summary>
 
@@ -954,7 +954,7 @@ end
 
 class Dolphin < Animal
   # Dolphins probably can't walk! We now need to go back and refactor Animal to account for this case, which can become
-  # very challenging as inheritance goes to 3+ levels.
+  # very challenging with multiple levels of inheritance!
 end
 ```
 
@@ -978,7 +978,7 @@ end
 ```
 
 ```ruby
-# ALSO BAD -- see 'Single Responsibility'!
+# ALSO BAD -- your module should describe the behavior it represents
 module AnimalHelper
   def walk
   end
