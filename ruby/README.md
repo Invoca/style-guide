@@ -942,28 +942,35 @@ When faced with at least two (though some would argue three) examples of code re
 ```ruby
 # BAD
 class Animal
-  def sleep
+  def walk
   end
+end
+
+class Cat < Animal
 end
 
 class Dog < Animal
 end
 
 class Dolphin < Animal
-  # .. Dolphins dont sleep! We now need to go back and refactor Animal to account for this case, which can become
+  # Dolphins probably can't walk! We now need to go back and refactor Animal to account for this case, which can become
   # very challenging as inheritance goes to 3+ levels.
 end
 ```
 
 ```ruby
 # GOOD
-module Sleepable
-  def sleep
+module Walkable
+  def walk
   end
 end
 
+class Cat
+  include Walkable
+end
+
 class Dog
-  include Sleepable
+  include Walkable
 end
 
 class Dolphin
@@ -973,8 +980,12 @@ end
 ```ruby
 # ALSO BAD -- see 'Single Responsibility'!
 module AnimalHelper
-  def sleep
+  def walk
   end
+end
+
+class Cat
+  include AnimalHelper
 end
 
 class Dog
@@ -985,7 +996,6 @@ class Dolphin
 end
 ```
 </details>
-
 
 ## Exceptions
 
