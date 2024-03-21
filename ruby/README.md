@@ -827,14 +827,14 @@ end
 ### SOLID Object Oriented Design
 These concepts should be applied generally when writing Object Oriented Code. Read more [here](https://en.wikipedia.org/wiki/SOLID).
 
-#### Single Responsibility Principle
+#### Single Responsibility Principle in More Detail
 > "Gather together the things that change for the same reasons. Separate those things that change for different reasons."
 > -- Robert C. Martin
 
 Design your classes such that all public methods relate to a singular purpose.
 Similarly, define your methods such that each only accomplishes a single task.
 
-> TIP: Describe your class aloud and listen for usage of the word: "AND"
+> TIP: Describe your class aloud and listen for usage of the word "AND" which implies that there are more responsibilities than there necessary.
 <details closed><summary>Examples</summary>
 
   ```ruby
@@ -933,9 +933,10 @@ Similarly, define your methods such that each only accomplishes a single task.
 
 ### Composition and Inheritance
 Generally, prefer Composing objects of behavior rather than relying on Inheriting behavior. Inheritance, especially after 2nd and 3rd levels of inheritance, becomes vastly harder to understand as it is extended.
+However, even composition has it's limitations and its best to apply either with a degree of moderation. (See: Composition Over Inheritance)
 
 #### Composition Over Inheritance
-When faced with at least two (though some would argue three) examples of code reuse, extract that code reuse into a well-named module or object which represents that behavior.
+When faced with at least two (though some would argue three) examples of code reuse, consider extracting that code reuse into a well-named module or object which represents that behavior. See below for examples, and gather feedback from your team early to ensure your abstractions aid in the understanding of the class.
 
 <details closed><summary>Examples</summary>
 
