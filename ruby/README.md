@@ -853,7 +853,7 @@ Similarly, define your methods such that each only accomplishes a single task.
     # Problem: Unnecessary Public Method makes the purpose of the class unclear
     def write_to_logs(message)
       # Problem: Constructing a custom logger might require changes
-      # as soon as we need to improving logging across the application.
+      # as soon as we need to improve logging across the application.
       Log4r::Logger.new("Application Log").info(message)
     end
 
@@ -900,7 +900,7 @@ Similarly, define your methods such that each only accomplishes a single task.
     # continued below..
   ```
 
-  We've extracted API Handling to a class which simplifies the understanding of CorrectionProcessor, in doing so, we've established that InvocaApiCall should have public methods (`success?` and `unauthorized?`) that CorrectionProcessor rely on -- future API updates can be accomplished so long as these methods are untouched.
+  We've extracted API Handling to a class which simplifies the task of understanding CorrectionProcessor, in doing so, we've established that InvocaApiCall should have public methods (`success?` and `unauthorized?`) that CorrectionProcessor rely on -- future API updates can be accomplished so long as these methods are untouched.
   ```ruby
   # Good
     private
@@ -932,7 +932,7 @@ Similarly, define your methods such that each only accomplishes a single task.
 </details>
 
 ### Composition and Inheritance
-Generally, prefer Composing objects of behavior rather than relying on Inheriting behavior because inheritance, especially after 2nd and 3rd levels of inheritance, becomes vastly harder to understand.
+Generally, prefer Composing objects of behavior rather than relying on Inheriting behavior. Inheritance, especially after 2nd and 3rd levels of inheritance, becomes vastly harder to understand as is extended.
 
 #### Composition Over Inheritance
 When faced with at least two (though some would argue three) examples of code reuse, extract that code reuse into a well-named module or object which represents that behavior.
