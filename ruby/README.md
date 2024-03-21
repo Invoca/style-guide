@@ -840,7 +840,7 @@ Similarly, define your methods such that each only accomplishes a single task.
   ```ruby
   # BAD
   class CorrectionProcessor
-    # Said aloud: "This class performs API handling and constructs a custom logger and processes a correction"
+    # Said aloud: "This class processes a correction.. and performs API handling and constructs a custom logger"
     def process
       if (response = call_third_party_api["response"]) && response["code"] == 200
         Correction.create!
@@ -900,7 +900,7 @@ Similarly, define your methods such that each only accomplishes a single task.
     # continued below..
   ```
 
-  We've extracted API Handling to a class which simplifies the task of understanding CorrectionProcessor, in doing so, we've established that InvocaApiCall should have public methods (`success?` and `unauthorized?`) that CorrectionProcessor rely on -- future API updates can be accomplished so long as these methods are untouched.
+  We've extracted API Handling to a class which simplifies the task of understanding CorrectionProcessor, in doing so, we've established that InvocaApiCall should have public methods (`success?` and `unauthorized?`) that CorrectionProcessor can rely on. Future API updates can be accomplished so long as these methods still exist.
   ```ruby
   # Good
     private
@@ -932,7 +932,7 @@ Similarly, define your methods such that each only accomplishes a single task.
 </details>
 
 ### Composition and Inheritance
-Generally, prefer Composing objects of behavior rather than relying on Inheriting behavior. Inheritance, especially after 2nd and 3rd levels of inheritance, becomes vastly harder to understand as is extended.
+Generally, prefer Composing objects of behavior rather than relying on Inheriting behavior. Inheritance, especially after 2nd and 3rd levels of inheritance, becomes vastly harder to understand as it is extended.
 
 #### Composition Over Inheritance
 When faced with at least two (though some would argue three) examples of code reuse, extract that code reuse into a well-named module or object which represents that behavior.
@@ -959,7 +959,7 @@ end
 ```
 
 ```ruby
-# GOOD
+# Good
 module Walkable
   def walk
   end
