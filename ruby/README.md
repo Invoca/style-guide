@@ -834,7 +834,7 @@ These concepts should be applied generally when writing Object Oriented Code. Re
 Design your classes such that all public methods relate to a singular purpose.
 Similarly, define your methods such that each only accomplishes a single task.
 
-> TIP: Describe your class aloud and listen for usage of the word "AND" which implies that there are more responsibilities than there necessary.
+> TIP: Describe your class aloud and listen for usage of the word "AND" which implies that there are more responsibilities than are necessary.
 <details closed><summary>Examples</summary>
 
   ```ruby
