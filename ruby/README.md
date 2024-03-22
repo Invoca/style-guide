@@ -714,12 +714,9 @@ Examples:
 > it even clearer. <br/>
 > -- Steve McConnell
 
-### Enough said.
-
+#### Enough said.
 
 ## Classes
-
-### Try to make your classes as [SOLID](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design\)) as possible.
 
 ### Namespace Definition
 Define (and reopen) namespaced classes and modules using explicit nesting.
@@ -826,6 +823,180 @@ class TestClass
   end
 end
 ```
+
+### SOLID Object Oriented Design
+These concepts should be applied generally when writing Object Oriented Code. Read more [here](https://en.wikipedia.org/wiki/SOLID).
+
+#### Single Responsibility Principle in More Detail
+> "Gather together the things that change for the same reasons. Separate those things that change for different reasons."
+> -- Robert C. Martin
+
+Design your classes such that all public methods relate to a singular purpose.
+Similarly, define your methods such that each only accomplishes a single task.
+
+> TIP: Describe your class aloud and listen for usage of the word "AND" which implies that there are more responsibilities than are necessary.
+<details closed><summary>Examples</summary>
+
+  ```ruby
+  # BAD
+  class CorrectionProcessor
+    # Said aloud: "This class processes a correction.. and performs API handling and constructs a custom logger"
+    def process
+      if (response = call_third_party_api["response"]) && response["code"] == 200
+        Correction.create!
+        write_to_logs("success!")
+      elsif response["code"] == 403
+        write_to_logs("unauthorized")
+      end
+    end
+
+    # Problem: Unnecessary Public Method makes the purpose of the class unclear
+    def write_to_logs(message)
+      # Problem: Constructing a custom logger might require changes
+      # as soon as we need to improve logging across the application.
+      Log4r::Logger.new("Application Log").info(message)
+    end
+
+    private
+    # Problem: Unencapsulated API behavior -- this class might require changes
+    # as soon as this third party API changes.
+    def call_third_party_api
+      response = Http.get('www.invoca.net').response
+      JSON.parse(response)
+    end
+  end
+  ```
+
+  We've extracted logging to a module which can be reused and have established a contract between this class and the module. So long as `log_info` is maintained, Logging can be freely extended. We also marked `log_info` as protected, which ensures that future developers are not able to violate the encapsulation of CorrectionProcessor and our Logging module by using CorrectionProcessor for logging for other classes.
+  ```ruby
+  # Good
+  module Logging
+    protected
+
+    def log_info(message)
+      logger.info(message)
+    end
+
+    private
+
+    def logger
+      @logger ||= Log4r::Logger.new
+    end
+  end
+
+  class CorrectionProcessor
+    # Said aloud: "This class processes a correction"
+    include Logging
+
+    def process
+      if invoca_api_call.success?
+        Correction.create!
+        log_info("success!")
+      elsif invoca_api_call.unauthorized?
+        log_info("unauthorized")
+      end
+    end
+
+    # continued below..
+  ```
+
+  We've extracted API Handling to a class which simplifies the task of understanding CorrectionProcessor, in doing so, we've established that InvocaApiCall should have public methods (`success?` and `unauthorized?`) that CorrectionProcessor can rely on. Future API updates can be accomplished so long as these methods still exist.
+  ```ruby
+  # Good
+    private
+
+    def invoca_api_call
+      @invoca_api_call ||= InvocaApiCall.new
+    end
+  end
+
+  class InvocaApiCall
+    def initialize
+      @response = JSON.parse(perform_api_call)
+    end
+
+    def perform_api_call
+      Net::Http.get('www.invoca.net')
+    end
+
+    def success?
+      @response["code"] == "200"
+    end
+
+    def unauthorized?
+      @response["code"] == "403"
+    end
+  end
+  ```
+
+</details>
+
+### Composition and Inheritance
+Generally, prefer Composing objects of behavior rather than relying on Inheriting behavior. Inheritance, especially after 2nd and 3rd levels of inheritance, becomes vastly harder to understand as it is extended.
+However, even composition has it's limitations and its best to apply either with a degree of moderation. (See: Composition Over Inheritance)
+
+#### Composition Over Inheritance
+When faced with at least two (though some would argue three) examples of code reuse, consider extracting that code reuse into a well-named module or object which represents that behavior. See below for examples, and gather feedback from your team early to ensure your abstractions aid in the understanding of the class.
+
+<details closed><summary>Examples</summary>
+
+```ruby
+# BAD
+class Animal
+  def walk
+  end
+end
+
+class Cat < Animal
+end
+
+class Dog < Animal
+end
+
+class Dolphin < Animal
+  # Dolphins probably can't walk! We now need to go back and refactor Animal to account for this case, which can become
+  # very challenging with multiple levels of inheritance!
+end
+```
+
+```ruby
+# Good
+module Walkable
+  def walk
+  end
+end
+
+class Cat
+  include Walkable
+end
+
+class Dog
+  include Walkable
+end
+
+class Dolphin
+end
+```
+
+```ruby
+# ALSO BAD -- your module should describe the behavior it represents
+module AnimalHelper
+  def walk
+  end
+end
+
+class Cat
+  include AnimalHelper
+end
+
+class Dog
+  include AnimalHelper
+end
+
+class Dolphin
+end
+```
+</details>
 
 ## Exceptions
 
