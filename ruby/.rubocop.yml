@@ -1,6 +1,6 @@
 # Examples of how to specifically exclude certain things
 AllCops:
-  TargetRubyVersion: 2.7.5
+  TargetRubyVersion: 3.1
   Exclude:
     - '**/*.yml'
     - '**/*.sql'
