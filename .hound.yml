@@ -1,5 +1,5 @@
 rubocop:
-  version: 0.91.0
+  version: 1.22.1
   config_file: ./ruby/.rubocop.yml
 
 jshint:
