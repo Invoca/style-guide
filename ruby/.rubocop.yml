@@ -161,6 +161,9 @@ Style/ParallelAssignment:
 Style/PreferredHashMethods:
   Enabled: false
 
+Style/QuotedSymbols:
+  Enabled: false
+
 Style/RegexpLiteral:
   Enabled: false
 
