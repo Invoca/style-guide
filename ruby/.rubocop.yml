@@ -190,6 +190,3 @@ Style/TrailingUnderscoreVariable:
 
 Style/WordArray:
   EnforcedStyle: brackets
-
-Rails/EnvironmentComparison:
-  Enabled: false
