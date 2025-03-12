@@ -81,6 +81,7 @@ Metrics/ModuleLength:
   Max: 200
 
 Metrics/ParameterLists:
+  CountKeywordArgs: false
   Max: 10
 
 Metrics/PerceivedComplexity:
