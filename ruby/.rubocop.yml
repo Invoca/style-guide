@@ -132,6 +132,9 @@ Style/EmptyMethod:
 Style/FormatStringToken:
   EnforcedStyle: template
 
+Style/GlobalStdStream:
+  Enabled: false
+
 Style/GuardClause:
   Enabled: false
 
