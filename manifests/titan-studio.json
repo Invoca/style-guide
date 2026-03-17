@@ -1,4 +1,7 @@
 {
-  "version": "0.0.8",
-  "url": "https://github.com/Invoca/titan-studio/releases/latest"
+  "name": "TitanStudio",
+  "version": "0.0.10",
+  "bundleIdentifier": "com.invoca.TitanStudio",
+  "downloadURL": "https://github.com/Invoca/titan-studio/releases/latest/download/TitanStudio.zip",
+ "manifestURL": "https://raw.githubusercontent.com/Invoca/style-guide/titan-studio-manifest/manifests/titan-studio.json"
 }
