@@ -1375,7 +1375,7 @@ end
 
 ## Testing
 
-### Avoid using `send` or `public_send` to test private methods
+### Avoid using `send` to test private methods
 
 Private methods are private for a reason—they represent internal implementation details that should not be relied upon by external code, including tests. Testing private methods directly couples your tests to implementation rather than behavior, making refactoring difficult.
 
