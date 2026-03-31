@@ -1394,49 +1394,47 @@ Private methods are private for a reason—they represent internal implementatio
 
 ```ruby
 # bad - testing private method directly
-class ShoppingCart
-  def total_with_tax
-    subtotal * (1 + tax_rate)
+class MyClass
+  def public_method
+    private_method
   end
 
   private
 
-  def tax_rate
-    # complex tax calculation logic
-    0.0825
+  def private_method
+    "does something"
   end
 end
 
 # bad test
-it "calculates correct tax rate" do
-  cart = ShoppingCart.new
-  expect(cart.send(:tax_rate)).to eq(0.0825)
+it "tests private method directly" do
+  obj = MyClass.new
+  expect(obj.send(:private_method)).to eq("does something")
 end
 
 # good - test through public interface
-it "calculates total with tax" do
-  cart = ShoppingCart.new
-  cart.add_item(item: Item.new(price: 100))
-  expect(cart.total_with_tax).to eq(108.25)
+it "tests public method behavior" do
+  obj = MyClass.new
+  expect(obj.public_method).to eq(expected_result)
 end
 
 # better - extract to testable component if complexity warrants
-class TaxCalculator
-  def self.rate_for(location:)
-    # complex tax calculation logic
-    0.0825
+class Calculator
+  def self.compute(value:)
+    # complex calculation logic
+    value * 1.5
   end
 end
 
-class ShoppingCart
-  def total_with_tax
-    subtotal * (1 + TaxCalculator.rate_for(location: location))
+class MyClass
+  def public_method
+    Calculator.compute(value: process_data)
   end
 end
 
-# now you can test TaxCalculator independently
-it "calculates correct tax rate for location" do
-  expect(TaxCalculator.rate_for(location: "CA")).to eq(0.0825)
+# now you can test Calculator independently
+it "computes value correctly" do
+  expect(Calculator.compute(value: 10)).to eq(15)
 end
 ```
 
