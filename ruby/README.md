@@ -19,6 +19,7 @@ Any adjustments to this styleguide should be captured in the [.rubocop.yml](.rub
 * [Constants](#constants)
 * [Regular Expressions](#regular-expressions)
 * [Metaprogramming](#metaprogramming)
+* [Testing](#testing)
 * [Misc](#misc)
 * [Preferred Ruby-isms](#preferred-ruby-isms)
 
@@ -1371,6 +1372,79 @@ end
 
 # best of all, though, would be to define_method as each findable attribute is declared
 ```
+
+## Testing
+
+### Avoid using `send` to test private methods
+
+Private methods are private for a reason — they represent internal implementation details that should not be relied upon by external code, including tests. Testing private methods directly couples your tests to implementation rather than behavior, making refactoring difficult.
+
+**Why this matters:**
+* Private methods can change or be removed without breaking the public contract
+* Tests that use `send` to access private methods become brittle and harder to maintain
+* It violates encapsulation and can lead to over-specified tests
+* It makes it unclear what the actual public API of your class is
+
+**What to do instead:**
+* Test the public interface of your class—private methods should be tested indirectly through the public methods that use them
+* If a private method is complex enough that you feel it needs direct testing, it's probably a sign that it should be:
+  - Extracted into its own class with a public interface
+  - Moved to a module or helper that can be tested independently
+  - Reconsidered as a protected or public method if other objects legitimately need it
+
+```ruby
+# bad - testing private method directly
+class MyClass
+  def public_method
+    private_method
+  end
+
+  private
+
+  def private_method
+    "does something"
+  end
+end
+
+# bad test
+it "tests private method directly" do
+  obj = MyClass.new
+  expect(obj.send(:private_method)).to eq("does something")
+end
+
+# good - test through public interface
+it "tests public method behavior" do
+  obj = MyClass.new
+  expect(obj.public_method).to eq(expected_result)
+end
+
+# better - extract to testable component if complexity warrants
+class Calculator
+  def self.compute(value:)
+    # complex calculation logic
+    value * 1.5
+  end
+end
+
+class MyClass
+  def public_method
+    Calculator.compute(value: process_data)
+  end
+end
+
+# now you can test Calculator independently
+it "computes value correctly" do
+  expect(Calculator.compute(value: 10)).to eq(15)
+end
+```
+
+**When it might be acceptable:**
+In rare cases, you might have a legitimate reason to use `send` in tests:
+* Testing legacy code that cannot be refactored safely
+* Verifying specific edge cases in private methods during a major refactoring (with the intent to remove after refactoring is complete)
+* Testing framework internals where you're explicitly testing private implementation
+
+If you find yourself in one of these situations, document why with a clear comment and consider whether there's a better approach.
 
 ## Misc
 
