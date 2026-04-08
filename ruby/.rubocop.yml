@@ -174,9 +174,6 @@ Style/RegexpLiteral:
 Style/RescueStandardError:
   Enabled: false
 
-Style/Send:
-  Enabled: true
-
 Style/SignalException:
   Enabled: false
 
