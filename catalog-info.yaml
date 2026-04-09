@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: style-guide
+  title: style-guide
+  description: "Centralized repository for all of Invoca's language style guides and HoundCI config"
+  annotations:
+    backstage.io/source-location: url:https://github.com/Invoca/style-guide/
+    github.com/project-slug: Invoca/style-guide
+    buildkite.com/project-slug: invoca/style-guide
+spec:
+  type: service
+  lifecycle: production
+  owner: dev-managers
+  system: developer-tooling
