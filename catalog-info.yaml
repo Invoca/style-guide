@@ -11,5 +11,5 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: front-end-platform
-  # system: TODO — see https://github.com/Invoca/backstage-catalog
+  owner: dev-managers
+  system: developer-tooling
