@@ -13,6 +13,36 @@ AllCops:
     - !ruby/regexp /old_and_unused\.rb$/
   NewCops: enable
 
+# Configure cops for styles that we enforce and autocorrect for (where applicable)
+# Please add new configurations in alphabetical order and make sure their keys are not re-used in the section below
+
+Layout/ExtraSpacing:
+  Enabled: true
+  AllowForAlignment: true
+  AllowBeforeTrailingComments: true
+  ForceEqualSignAlignment: true
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstHashElementLineBreak:
+  Enabled: true
+
+Layout/HashAlignment:
+  Enabled: true
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+  EnforcedLastArgumentHashStyle: always_inspect
+
+Layout/MultilineHashBraceLayout:
+  EnforcedStyle: symmetrical
+
+Layout/MultilineHashKeyLineBreaks:
+  Enabled: true
+
 # Configure cops for styles that we do not adhere to or are not agreed upon
 # Default settings and options can be viewed here: https://raw.githubusercontent.com/bbatsov/rubocop/master/config/default.yml
 # Please add new configurations in alphabetical order
@@ -24,12 +54,6 @@ Layout/EmptyLinesAroundClassBody:
   Enabled: false
 
 Layout/EndOfLine:
-  Enabled: false
-
-Layout/ExtraSpacing:
-  Enabled: false
-
-Layout/HashAlignment:
   Enabled: false
 
 Layout/LineLength:
