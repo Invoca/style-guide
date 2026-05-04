@@ -1,0 +1,21 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+    <channel>
+        <title>TitanStudio</title>
+        <link>https://raw.githubusercontent.com/Invoca/style-guide/titan-studio-manifest/manifests/appcast.xml</link>
+        <description>Most recent changes with links to updates.</description>
+        <language>en</language>
+        <item>
+            <title>Version 0.2.4</title>
+            <pubDate>Mon, 04 May 2026 12:00:00 +0000</pubDate>
+            <sparkle:shortVersionString>0.2.4</sparkle:shortVersionString>
+            <sparkle:version>0.2.4</sparkle:version>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://raw.githubusercontent.com/Invoca/style-guide/titan-studio-manifest/manifests/titan-studio.dmg"
+                sparkle:edSignature="gM2GOqv25uN3jSb2Q7uTkShWNihUuZiRwPle/G7K0/OnQlzJ40GdvNq8grVNi+4JQtLcBQq1muGJmMB6KPFOBw=="
+                length="20736181"
+                type="application/x-apple-diskimage" />
+        </item>
+    </channel>
+</rss>
