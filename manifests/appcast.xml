@@ -6,6 +6,19 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
+            <title>Version 0.2.7</title>
+            <pubDate>Thu, 07 May 2026 15:24:11 +0000</pubDate>
+            <sparkle:shortVersionString>0.2.7</sparkle:shortVersionString>
+            <sparkle:version>2</sparkle:version>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <sparkle:releaseNotesLink>https://github.com/Invoca/titan-studio/releases/tag/0.2.7</sparkle:releaseNotesLink>
+            <enclosure
+                url="https://raw.githubusercontent.com/Invoca/style-guide/titan-studio-manifest/manifests/titan-studio.dmg"
+                sparkle:edSignature="hw/26HcOKDG6omhBLsyksMnMAb+AuxZI5X8khv6ffjHahIuy7bnMFmzcQeXcj7v34NB4LyHHnsEA06WZDW9YAg=="
+                length="21604325"
+                type="application/x-apple-diskimage" />
+        </item>
+        <item>
             <title>Version 0.2.6</title>
             <pubDate>Thu, 07 May 2026 14:25:54 +0000</pubDate>
             <sparkle:shortVersionString>0.2.6</sparkle:shortVersionString>
