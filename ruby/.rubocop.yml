@@ -97,9 +97,6 @@ Naming/RescuedExceptionsVariableName:
 Naming/VariableNumber:
   Enabled: false
 
-Rails/ReadWriteAttribute:
-  Enabled: false
-
 Style/AndOr:
   EnforcedStyle: conditionals
 
