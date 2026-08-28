@@ -6,6 +6,19 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
+            <title>Version 0.1.2</title>
+            <pubDate>Fri, 28 Aug 2026 19:17:53 +0000</pubDate>
+            <sparkle:shortVersionString>0.1.2</sparkle:shortVersionString>
+            <sparkle:version>3</sparkle:version>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <sparkle:releaseNotesLink>https://github.com/Invoca/protobooth-app/releases/tag/0.1.2</sparkle:releaseNotesLink>
+            <enclosure
+                url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
+                sparkle:edSignature="AyH/Z2VxyxCaIMZWeB2ST78B+HPZyYDsmpfeBkGPfvgpltyuGuOmVusiPUxs4WCOVa5+/QgZZU9F7Hr0hAKyCA=="
+                length="2923235"
+                type="application/x-apple-diskimage" />
+        </item>
+        <item>
             <title>Version 0.1.1</title>
             <pubDate>Fri, 28 Aug 2026 17:30:32 +0000</pubDate>
             <sparkle:shortVersionString>0.1.1</sparkle:shortVersionString>
