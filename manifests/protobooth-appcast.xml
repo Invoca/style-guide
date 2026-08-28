@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+    <channel>
+        <title>Protobooth Changelog</title>
+        <link>https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth-appcast.xml</link>
+        <description>Most recent changes with links to updates.</description>
+        <language>en</language>
+    </channel>
+</rss>
