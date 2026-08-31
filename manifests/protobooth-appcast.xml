@@ -11,7 +11,13 @@
             <sparkle:shortVersionString>0.1.2</sparkle:shortVersionString>
             <sparkle:version>3</sparkle:version>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <sparkle:releaseNotesLink>https://github.com/Invoca/protobooth-app/releases/tag/0.1.2</sparkle:releaseNotesLink>
+            <description><![CDATA[
+                <ul>
+                    <li>Fix a bug where a stray trailing newline/space from copy-pasting an API key or GitHub PAT into Settings would silently corrupt the stored credential, causing the first design attempt to fail with a generic error</li>
+                    <li>Show the real error (HTTP status and response body) instead of a generic message when a GitHub or Anthropic request fails</li>
+                    <li>Add placeholder hints (sk-ant-..., ghp_...) to the Settings fields</li>
+                </ul>
+            ]]></description>
             <enclosure
                 url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
                 sparkle:edSignature="AyH/Z2VxyxCaIMZWeB2ST78B+HPZyYDsmpfeBkGPfvgpltyuGuOmVusiPUxs4WCOVa5+/QgZZU9F7Hr0hAKyCA=="
@@ -24,7 +30,9 @@
             <sparkle:shortVersionString>0.1.1</sparkle:shortVersionString>
             <sparkle:version>2</sparkle:version>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <sparkle:releaseNotesLink>https://github.com/Invoca/protobooth-app/releases/tag/0.1.1</sparkle:releaseNotesLink>
+            <description><![CDATA[
+                <p>Fixes: pasting a screenshot (e.g. via CleanShot) now attaches it as an image instead of inserting the file path as text; fixed misaligned paperclip icon in the chat input.</p>
+            ]]></description>
             <enclosure
                 url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
                 sparkle:edSignature="U6tzItpaQDlNSKyG6eZOqUNz2ONBRekxKA7Fd7r9ALY/EVZK1da9Lt64T0YpH4z32xipBEAuU/XD/23eVq4VDQ=="
@@ -37,7 +45,9 @@
             <sparkle:shortVersionString>0.1.0</sparkle:shortVersionString>
             <sparkle:version>1</sparkle:version>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <sparkle:releaseNotesLink>https://github.com/Invoca/protobooth-app/releases/tag/0.1.0</sparkle:releaseNotesLink>
+            <description><![CDATA[
+                <p>First signed, notarized release of Protobooth, with Sparkle auto-update support.</p>
+            ]]></description>
             <enclosure
                 url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
                 sparkle:edSignature="Bvx7uqBwQ+g9k2WhM6EuTC7wAlNEK4ENneHfYeIHDB0jx6540bQAPNGZa67ISZoVZEWe0nQdGEWnT4YdfKmrDg=="
