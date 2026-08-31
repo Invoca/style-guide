@@ -6,6 +6,29 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
+            <title>Version 0.2.0</title>
+            <pubDate>Mon, 31 Aug 2026 16:49:00 +0000</pubDate>
+            <sparkle:shortVersionString>0.2.0</sparkle:shortVersionString>
+            <sparkle:version>4</sparkle:version>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[
+                <ul>
+                    <li>Sign in with GitHub directly (via the Invoca Protobooth GitHub App) instead of pasting a personal access token</li>
+                    <li>Open Session: paste a DevSpace prototype URL to check out its chat history and versions locally, with a prompt to pull when a newer version is published</li>
+                    <li>Published versions now show who published them</li>
+                    <li>Organize prototypes into folders in the sidebar, with drag-to-reorder and collapse/expand</li>
+                    <li>A new prototype appears in the sidebar immediately, gets an AI-suggested name after its first generation, and can be renamed manually at any time</li>
+                    <li>Sidebar rows show a live loading indicator while a prototype is generating</li>
+                    <li>Switch freely between prototypes while one is generating — work on several at once without losing progress</li>
+                </ul>
+            ]]></description>
+            <enclosure
+                url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
+                sparkle:edSignature="TtlFxGzsiI5JcD2sIiHsyOTRTgMuEIzEYFX62s6DwIjHlPTmde3EFVjNJz4FY3yFZ4T/fnMMDQjb3jS64yElAw=="
+                length="3650867"
+                type="application/x-apple-diskimage" />
+        </item>
+        <item>
             <title>Version 0.1.2</title>
             <pubDate>Fri, 28 Aug 2026 19:17:53 +0000</pubDate>
             <sparkle:shortVersionString>0.1.2</sparkle:shortVersionString>
