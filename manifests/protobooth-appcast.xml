@@ -6,6 +6,24 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
+            <title>Version 0.2.1</title>
+            <pubDate>Tue, 01 Sep 2026 15:37:32 +0000</pubDate>
+            <sparkle:shortVersionString>0.2.1</sparkle:shortVersionString>
+            <sparkle:version>5</sparkle:version>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[
+                <ul>
+                    <li>Publish button is now green and reads "Publish" (or "Update") to stand out</li>
+                    <li>After publishing, a new "Link with Description" box shows an AI-generated summary of the prototype alongside the share link, with one click to copy both together</li>
+                </ul>
+            ]]></description>
+            <enclosure
+                url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
+                sparkle:edSignature="4zJ4qZbGtLbRv0G0SYRpxi918icmhGjZxVN7pDzR28DUADvYZxx/tlr3TzyqTlynVC3L0ferU1CJbzru/4mZBA=="
+                length="3258580"
+                type="application/x-apple-diskimage" />
+        </item>
+        <item>
             <title>Version 0.2.0</title>
             <pubDate>Mon, 31 Aug 2026 16:49:00 +0000</pubDate>
             <sparkle:shortVersionString>0.2.0</sparkle:shortVersionString>
