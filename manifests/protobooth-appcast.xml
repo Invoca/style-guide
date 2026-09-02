@@ -6,6 +6,26 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
+            <title>Version 0.3.0</title>
+            <pubDate>Wed, 02 Sep 2026 16:22:33 +0000</pubDate>
+            <sparkle:shortVersionString>0.3.0</sparkle:shortVersionString>
+            <sparkle:version>6</sparkle:version>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[
+                <ul>
+                    <li>Configure MCP servers in Settings and use their tools directly in chat</li>
+                    <li>Sign in with the Invoca Protobooth GitHub App (replaces the previous token flow)</li>
+                    <li>Rename sidebar sessions in place, with a per-row spinner while a prototype is generating</li>
+                    <li>Fixed truncated prototypes not persisting and Return inserting a newline in the composer</li>
+                </ul>
+            ]]></description>
+            <enclosure
+                url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
+                sparkle:edSignature="i2kZfLnQ+OZ9u8VRYoCmUCWS2hkXUj4XPr565HPEEl9BueH2bgycFnAbkydp0UB2dmzl8axqJ8+YFtdFkYHnAQ=="
+                length="3538633"
+                type="application/x-apple-diskimage" />
+        </item>
+        <item>
             <title>Version 0.2.1</title>
             <pubDate>Tue, 01 Sep 2026 15:37:32 +0000</pubDate>
             <sparkle:shortVersionString>0.2.1</sparkle:shortVersionString>
