@@ -6,6 +6,26 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
+            <title>Version 0.3.2</title>
+            <pubDate>Thu, 03 Sep 2026 15:08:10 +0000</pubDate>
+            <sparkle:shortVersionString>0.3.2</sparkle:shortVersionString>
+            <sparkle:version>8</sparkle:version>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[
+                <ul>
+                    <li>Fixed a bug where malformed edit responses from the AI could corrupt the prototype's HTML</li>
+                    <li>Full chat replies are now kept in the thread behind a collapsible Details section instead of being cut short or lost</li>
+                    <li>Added a "Copy link" action to the version menu for published versions</li>
+                    <li>Links in chat messages now show a pointer cursor on hover</li>
+                </ul>
+            ]]></description>
+            <enclosure
+                url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
+                sparkle:edSignature="PTWelITxSOhbLkrpp+Gw1bjP9vfekR0b8Dk2LTkyEQ6ypMDHCDfmrxIcB00N0bizFKDkklrr8GFzUrQHllBLBA=="
+                length="3560154"
+                type="application/x-apple-diskimage" />
+        </item>
+        <item>
             <title>Version 0.3.1</title>
             <pubDate>Wed, 02 Sep 2026 19:23:19 +0000</pubDate>
             <sparkle:shortVersionString>0.3.1</sparkle:shortVersionString>
