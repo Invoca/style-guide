@@ -6,6 +6,23 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
+            <title>Version 0.4.0</title>
+            <pubDate>Fri, 11 Sep 2026 20:06:00 +0000</pubDate>
+            <sparkle:shortVersionString>0.4.0</sparkle:shortVersionString>
+            <sparkle:version>11</sparkle:version>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[
+                <ul>
+                    <li>Prototypes are now grounded in the Invoca Design System: the model reads the real Views, Patterns, and Components before building, and cites the constraints that drove its choices</li>
+                </ul>
+            ]]></description>
+            <enclosure
+                url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
+                sparkle:edSignature="kK2JZv/1C2uNBUWWFYmnFukBdYFFHcZsWz40ldgbqwWKebbOh+sKiW7dImVnF++uEPv92aYjMLq1KYwxzJFwAA=="
+                length="3618331"
+                type="application/x-apple-diskimage" />
+        </item>
+        <item>
             <title>Version 0.3.4</title>
             <pubDate>Tue, 08 Sep 2026 15:43:27 +0000</pubDate>
             <sparkle:shortVersionString>0.3.4</sparkle:shortVersionString>
