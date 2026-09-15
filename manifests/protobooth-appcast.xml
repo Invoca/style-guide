@@ -6,6 +6,25 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
 <item>
+        <title>Version 0.4.2</title>
+        <pubDate>Tue, 15 Sep 2026 20:05:02 +0000</pubDate>
+        <sparkle:shortVersionString>0.4.2</sparkle:shortVersionString>
+        <sparkle:version>13</sparkle:version>
+        <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+        <description><![CDATA[
+            <ul>
+                <li>Text/HTML attachments now allow up to 500 KB</li>
+                <li>While designing, the chat shows reasoning instead of dumping prototype code (preview still streams live)</li>
+                <li>Pasting images and files in the composer attaches them correctly</li>
+            </ul>
+        ]]></description>
+        <enclosure
+            url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
+            sparkle:edSignature="aoUenrelUD+cHVYBKc/CZEwgU6oz057GU6Oq+l4kFesrDf/e+r/zEIuvXbqEmdc1k4/DSdOaVGhr6Rp+rglVBw=="
+            length="3705315"
+            type="application/x-apple-diskimage" />
+    </item>
+<item>
         <title>Version 0.4.1</title>
         <pubDate>Mon, 14 Sep 2026 18:20:00 +0000</pubDate>
         <sparkle:shortVersionString>0.4.1</sparkle:shortVersionString>
