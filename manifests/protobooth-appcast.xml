@@ -6,6 +6,25 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
 <item>
+        <title>Version 0.5.0</title>
+        <pubDate>Fri, 18 Sep 2026 14:06:45 +0000</pubDate>
+        <sparkle:shortVersionString>0.5.0</sparkle:shortVersionString>
+        <sparkle:version>14</sparkle:version>
+        <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+        <description><![CDATA[
+            <ul>
+                <li>Prototypes are now sectioned projects (shell + sections + shared CSS/JS) so edits can target one section instead of rebuilding the whole page</li>
+                <li>Preview and publish still produce one self-contained HTML page</li>
+                <li>First builds can emit multiple files in parallel; follow-up edits accept multi-file patches</li>
+            </ul>
+        ]]></description>
+        <enclosure
+            url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
+            sparkle:edSignature="M5MxApswJOSUtMUimdmFElkiel2BXGwitfYh2L/kAltPow8cueZ1VofJsc9vWSWJ603pU8203elpUa9oQwQ7Aw=="
+            length="3911579"
+            type="application/x-apple-diskimage" />
+    </item>
+<item>
         <title>Version 0.4.2</title>
         <pubDate>Tue, 15 Sep 2026 20:05:02 +0000</pubDate>
         <sparkle:shortVersionString>0.4.2</sparkle:shortVersionString>
