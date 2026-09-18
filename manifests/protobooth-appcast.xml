@@ -6,6 +6,25 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
 <item>
+        <title>Version 0.5.1</title>
+        <pubDate>Fri, 18 Sep 2026 19:01:04 +0000</pubDate>
+        <sparkle:shortVersionString>0.5.1</sparkle:shortVersionString>
+        <sparkle:version>15</sparkle:version>
+        <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+        <description><![CDATA[
+            <ul>
+                <li>Pick an IDS theme per session (1.0, 2.0, or Wireframe) — onesheets load from DevSpace so they stay updatable</li>
+                <li>Clone any prototype from the sidebar, including chat history and current files</li>
+                <li>Build progress shows a little bot-crew animation while the prototype generates</li>
+            </ul>
+        ]]></description>
+        <enclosure
+            url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
+            sparkle:edSignature="YIhmTTT/5k0DYEUnFaXEyZSxgSqib7ZJVn0HjqZyJJ5ssjHRf1h+3Hg1Q6K1NmVzzBEtP729OyTWgGxOMltbBQ=="
+            length="3960501"
+            type="application/x-apple-diskimage" />
+    </item>
+<item>
         <title>Version 0.5.0</title>
         <pubDate>Fri, 18 Sep 2026 14:06:45 +0000</pubDate>
         <sparkle:shortVersionString>0.5.0</sparkle:shortVersionString>
