@@ -5,6 +5,26 @@
         <link>https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth-appcast.xml</link>
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
+        <item>
+            <title>Version 0.6.3</title>
+            <pubDate>Tue, 06 Oct 2026 20:46:05 +0000</pubDate>
+            <sparkle:shortVersionString>0.6.3</sparkle:shortVersionString>
+            <sparkle:version>19</sparkle:version>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[
+                <ul>
+                    <li>Record prototype interactions beside comments</li>
+                    <li>Stop published pages from posting events to a static host</li>
+                    <li>Keep comment drafts when the inspector switches to Insights</li>
+                    <li>Use Claude Opus 5.5 for the design loop and Sonnet 5.5 for parallel CSS/JS</li>
+                </ul>
+            ]]></description>
+            <enclosure
+                url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
+                sparkle:edSignature="zqaO3tEM+rNsh3kmXlEDxATvHSYCs2QYtXnoVyaX5eUlyMpQDAlsX0v7qHgvSP67Y/LWYSJxIE3k+L1vOdZLCA=="
+                length="4312056"
+                type="application/x-apple-diskimage" />
+        </item>
             <item>
         <title>Version 0.6.2</title>
         <pubDate>Tue, 29 Sep 2026 20:16:10 +0000</pubDate>
