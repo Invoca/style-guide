@@ -6,6 +6,24 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
+            <title>Version 0.7.0</title>
+            <pubDate>Mon, 12 Oct 2026 14:59:38 +0000</pubDate>
+            <sparkle:shortVersionString>0.7.0</sparkle:shortVersionString>
+            <sparkle:version>20</sparkle:version>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[
+                <ul>
+                    <li>Click an element in the preview (Select, ⇧⌘E) to target your next prompt at it; only that section gets patched</li>
+                    <li>Wheel scrolling works while picking</li>
+                </ul>
+            ]]></description>
+            <enclosure
+                url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
+                sparkle:edSignature="CrtJvVRssB8gf/s6Rp6XnDwf8cSeRDmksyFK0hGt0BUrwe9KUrZd2gEVXT2hvcFkIJZf1cLCM6nDyi8nqSdKAA=="
+                length="4384476"
+                type="application/x-apple-diskimage" />
+        </item>
+        <item>
             <title>Version 0.6.3</title>
             <pubDate>Tue, 06 Oct 2026 20:46:05 +0000</pubDate>
             <sparkle:shortVersionString>0.6.3</sparkle:shortVersionString>
