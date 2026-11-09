@@ -6,6 +6,24 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
+            <title>Version 0.9.0</title>
+            <pubDate>Mon, 09 Nov 2026 21:26:43 +0000</pubDate>
+            <sparkle:shortVersionString>0.9.0</sparkle:shortVersionString>
+            <sparkle:version>22</sparkle:version>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[
+                <ul>
+                    <li>Restore or branch from an earlier version: while previewing an older version, use the version menu's "Restore or branch from version NN…" (or the bar on the preview). Pick Restore in this prototype to copy it forward as the newest version and keep editing from it, or Clone into a new session to start a fresh prototype from that version. Later versions stay in history. (PR #17)</li>
+                    <li>Interaction recording is far quieter: Insights events are buffered on disk and committed to DevSpace at most once a minute per prototype, with a final flush on delete/close/quit, instead of a commit every few seconds. (PR #16)</li>
+                </ul>
+            ]]></description>
+            <enclosure
+                url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
+                sparkle:edSignature="dIa60TTu0fiSNxaGCAsmXztaHl0aaI4Jz/nTNO3KPMoZpeT3d6vieuI+S3xvhA+BLTqk2oYhTdWF71CFFYHtAQ=="
+                length="4543172"
+                type="application/x-apple-diskimage" />
+        </item>
+        <item>
             <title>Version 0.8.0</title>
             <pubDate>Fri, 30 Oct 2026 13:29:57 +0000</pubDate>
             <sparkle:shortVersionString>0.8.0</sparkle:shortVersionString>
