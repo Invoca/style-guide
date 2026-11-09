@@ -6,6 +6,23 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
+            <title>Version 0.9.1</title>
+            <pubDate>Mon, 09 Nov 2026 21:50:30 +0000</pubDate>
+            <sparkle:shortVersionString>0.9.1</sparkle:shortVersionString>
+            <sparkle:version>23</sparkle:version>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[
+                <ul>
+                    <li>Fixes the version preview banner being hard to read in dark mode.</li>
+                </ul>
+            ]]></description>
+            <enclosure
+                url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
+                sparkle:edSignature="gJKh0EEcT1aZtDXhgnKQWENbDoeiO7cBLoAmudR2DXTwE5gIzQNsPHCA1pqA8kvcjHaevpRkhOaGDUqb+adCAw=="
+                length="4545818"
+                type="application/x-apple-diskimage" />
+        </item>
+        <item>
             <title>Version 0.9.0</title>
             <pubDate>Mon, 09 Nov 2026 21:26:43 +0000</pubDate>
             <sparkle:shortVersionString>0.9.0</sparkle:shortVersionString>
