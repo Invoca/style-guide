@@ -6,6 +6,27 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
+            <title>Version 0.10.0</title>
+            <pubDate>Thu, 12 Nov 2026 15:43:12 +0000</pubDate>
+            <sparkle:shortVersionString>0.10.0</sparkle:shortVersionString>
+            <sparkle:version>24</sparkle:version>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[
+                <ul>
+                    <li>Journey canvas: sketch a customer journey with a pen (four marker colors), sticky-note cards, and arrows that connect cards and follow them when they move. Undo and redo from the Edit menu, and delete a card from the card.</li>
+                    <li>Seed a journey from notes: paste a transcript or drop a .txt or .md file, and Protobooth lays the stages out left to right. The raw notes stay on your machine.</li>
+                    <li>Build a prototype from a card, link an existing one, or drag a prototype from the sidebar onto a card. A card can hold several prototypes, and a prototype can appear on cards in several journeys.</li>
+                    <li>Save journey versions with Command-S, open an older version read-only, and restore it without dropping comments or later versions. Comment on a journey or on a single step.</li>
+                    <li>Publish a journey and its linked prototypes together through DevSpace. The published page links each card to its prototypes.</li>
+                </ul>
+            ]]></description>
+            <enclosure
+                url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
+                sparkle:edSignature="ImsPrJlbkCZVQ2RItwb6IxYukUKy7vo5W3mx/gkX2yHxGZo6MZcw9eNLI+8EeOQ86DGRdr/W7LWh9OL4dHRaCQ=="
+                length="5134687"
+                type="application/x-apple-diskimage" />
+        </item>
+        <item>
             <title>Version 0.9.1</title>
             <pubDate>Mon, 09 Nov 2026 21:50:30 +0000</pubDate>
             <sparkle:shortVersionString>0.9.1</sparkle:shortVersionString>
