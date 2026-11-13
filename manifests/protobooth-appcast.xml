@@ -6,6 +6,26 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
+            <title>Version 0.10.1</title>
+            <pubDate>Fri, 13 Nov 2026 19:31:32 +0000</pubDate>
+            <sparkle:shortVersionString>0.10.1</sparkle:shortVersionString>
+            <sparkle:version>25</sparkle:version>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[
+                <ul>
+                    <li>The Theme dropdown is now fully clickable. Previously only the title text opened it.</li>
+                    <li>Themes are renamed to Rapport (IDS 2.0), Invoca Blue (IDS 1.0), and Wireframe Mode. Rapport is the new default for new sessions.</li>
+                    <li>Existing sessions keep their theme.</li>
+                    <li>Published booths now carry their theme when checked out.</li>
+                </ul>
+            ]]></description>
+            <enclosure
+                url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
+                sparkle:edSignature="cdm9K3sHhcGY6iDB8TgDiS6fcmaZJaZ/0DEhyoPXbK7qg05B5q+94tdMKbYKId/8vHUcsmGnU27isNBzDuCfDw=="
+                length="5138351"
+                type="application/x-apple-diskimage" />
+        </item>
+        <item>
             <title>Version 0.10.0</title>
             <pubDate>Thu, 12 Nov 2026 15:43:12 +0000</pubDate>
             <sparkle:shortVersionString>0.10.0</sparkle:shortVersionString>
