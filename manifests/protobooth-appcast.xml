@@ -6,6 +6,25 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
+            <title>Version 0.10.2</title>
+            <pubDate>Mon, 23 Nov 2026 16:34:30 +0000</pubDate>
+            <sparkle:shortVersionString>0.10.2</sparkle:shortVersionString>
+            <sparkle:version>26</sparkle:version>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[
+                <ul>
+                    <li>GitHub sign-in is now the only way Protobooth authenticates to GitHub.</li>
+                    <li>The Settings personal-access-token override and the build-time embedded token fallback are removed.</li>
+                    <li>Any previously saved override token is deleted on launch. If you had pasted a token, use Sign in with GitHub.</li>
+                </ul>
+            ]]></description>
+            <enclosure
+                url="https://raw.githubusercontent.com/Invoca/style-guide/protobooth-manifest/manifests/protobooth.dmg"
+                sparkle:edSignature="USDbrrnJ+oYIlstJd48Df5QK2m8K0cipatdCOHZ8jshHIaDG/V3NTsSdsUSrH858gJGPREBiet0Vu6FWn2plAg=="
+                length="5132747"
+                type="application/x-apple-diskimage" />
+        </item>
+        <item>
             <title>Version 0.10.1</title>
             <pubDate>Fri, 13 Nov 2026 19:31:32 +0000</pubDate>
             <sparkle:shortVersionString>0.10.1</sparkle:shortVersionString>
